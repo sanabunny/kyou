@@ -1,1 +1,33 @@
-flatpak/page.fuwa.kyou.Devel.json~
+# build artifacts
+build/
+build-*/
+_build/
+.local-install/
+
+# generated config (regenerated fresh by meson every build)
+kyou/config.py
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# flatpak
+.flatpak-builder/
+flatpak/*.json~
+repo/
+*.flatpak
+
+# macos
+.DS_Store
+
+# editors
+.vscode/
+.idea/
+*.swp
+
+# gnome builder
+.buildconfig
