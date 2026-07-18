@@ -1,0 +1,4 @@
+APP_ID: str
+PREFIX: str
+PROFILE: str
+LOCALEDIR: str

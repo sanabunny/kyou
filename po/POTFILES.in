@@ -1,0 +1,6 @@
+kyou/application.py
+kyou/ui/window.blp
+kyou/ui/window.py
+data/page.fuwa.kyou.desktop.in
+data/page.fuwa.kyou.gschema.xml.in
+data/page.fuwa.kyou.metainfo.xml.in
