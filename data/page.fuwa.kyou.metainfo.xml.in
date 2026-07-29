@@ -11,18 +11,13 @@
   </description>
 
   <developer id="page.fuwa">
-    <name translate="no">Developer Name</name>
+    <name translate="no">fuwaflow</name>
   </developer>
 
-  <url type="homepage">https://example.org/</url>
-  <url type="vcs-browser">https://example.org/repository</url>
-  <url type="bugtracker">https://example.org/issues</url>
-  <url type="translate">https://example.org/translate</url>
-  <url type="faq">https://example.org/faq</url>
-  <url type="help">https://example.org/help</url>
-  <url type="donation">https://example.org/donate</url>
-  <url type="contact">https://example.org/contact</url>
-  <url type="contribute">https://example.org/contribute</url>
+  <url type="homepage">https://fuwa.page/</url>
+  <url type="vcs-browser">https://github.com/fuwaflow/kyou</url>
+  <url type="bugtracker">https://github.com/fuwaflow/kyou/issues</url>
+  <url type="contact">mailto:fuwaflow@fuwa.page</url>
 
   <translation type="gettext">kyou</translation>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
