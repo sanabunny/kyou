@@ -7,3 +7,55 @@ window.dark-mode {
   --window-bg-color: oklch(0.22 0.02 50);
   --window-fg-color: oklch(0.93 0.02 75);
 }
+
+viewswitcherbar {
+  background-color: oklch(0.94 0.02 70 / 0.75);
+  border: 1px solid oklch(0.5 0.06 55 / 0.15);
+  border-radius: 999px;
+  margin: 0 1.25rem 1.25rem 1.25rem;
+  padding: 0.25rem;
+  box-shadow:
+    0 8px 32px oklch(0 0 0 / 0.06),
+    0 2px 8px oklch(0 0 0 / 0.03),
+    inset 0 1px 1px oklch(1 0 0 / 0.6);
+}
+
+actionbar > revealer > box {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+viewswitcherbar button {
+  color: oklch(0 0 0 / 0.5);
+  border-radius: 999px;
+}
+
+viewswitcherbar button:checked {
+  color: var(--accent-color);
+}
+
+viewswitcher {
+  margin: 0 -16px;
+}
+
+window viewswitcherbar viewswitcher button image {
+  -gtk-icon-size: 24px;
+}
+
+window.dark-mode viewswitcherbar {
+  background-color: oklch(0.28 0.03 55 / 0.75);
+  border-color: oklch(0.95 0.02 75 / 0.12);
+  box-shadow:
+    0 8px 32px oklch(0 0 0 / 0.3),
+    0 2px 8px oklch(0 0 0 / 0.2),
+    inset 0 1px 1px oklch(1 0 0 / 0.08);
+}
+
+window.dark-mode viewswitcherbar button {
+  color: oklch(1 0 0 / 0.5);
+}
+
+window.dark-mode viewswitcherbar button:checked {
+  color: var(--accent-color);
+}
