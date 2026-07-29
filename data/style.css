@@ -1,0 +1,9 @@
+:root {
+  --window-bg-color: oklch(0.97 0.02 75);
+  --window-fg-color: oklch(0.32 0.06 50);
+}
+
+window.dark-mode {
+  --window-bg-color: oklch(0.22 0.02 50);
+  --window-fg-color: oklch(0.93 0.02 75);
+}
