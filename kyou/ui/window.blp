@@ -51,11 +51,19 @@ template $Window: Adw.ApplicationWindow {
                     Label greeting_label {
                       halign: start;
                       label: _("good morning 🌸");
+
+                      styles [
+                        "title-1",
+                      ]
                     }
 
                     Label date_label {
                       halign: start;
                       label: _("wednesday, 29 july");
+
+                      styles [
+                        "dim-label",
+                      ]
                     }
                   }
 
@@ -74,6 +82,11 @@ template $Window: Adw.ApplicationWindow {
                       Label {
                         halign: start;
                         label: "NOW";
+
+                        styles [
+                          "caption-heading",
+                          "accent",
+                        ]
                       }
 
                       Box {
@@ -84,6 +97,10 @@ template $Window: Adw.ApplicationWindow {
                         Label {
                           valign: center;
                           label: "⏰";
+
+                          styles [
+                            "title-1",
+                          ]
                         }
 
                         Box {
@@ -96,12 +113,21 @@ template $Window: Adw.ApplicationWindow {
                             xalign: 0;
                             wrap: true;
                             label: _("driving lesson");
+
+                            styles [
+                              "heading",
+                            ]
                           }
 
                           Label {
                             halign: start;
                             xalign: 0;
                             label: "15:00";
+
+                            styles [
+                              "caption",
+                              "dim-label",
+                            ]
                           }
                         }
                       }
@@ -115,6 +141,11 @@ template $Window: Adw.ApplicationWindow {
                       Label {
                         halign: start;
                         label: "NEXT";
+
+                        styles [
+                          "caption-heading",
+                          "dim-label",
+                        ]
                       }
 
                       Box {
@@ -125,6 +156,10 @@ template $Window: Adw.ApplicationWindow {
                         Label {
                           valign: center;
                           label: "📝";
+
+                          styles [
+                            "title-1",
+                          ]
                         }
 
                         Box {
@@ -137,12 +172,21 @@ template $Window: Adw.ApplicationWindow {
                             xalign: 0;
                             wrap: true;
                             label: _("feed my cat 🐈");
+
+                            styles [
+                              "heading",
+                            ]
                           }
 
                           Label {
                             halign: start;
                             xalign: 0;
                             label: "18:00";
+
+                            styles [
+                              "caption",
+                              "dim-label",
+                            ]
                           }
                         }
                       }
@@ -156,6 +200,11 @@ template $Window: Adw.ApplicationWindow {
                       Label {
                         halign: start;
                         label: "LATER";
+
+                        styles [
+                          "caption-heading",
+                          "dim-label",
+                        ]
                       }
 
                       Box {
@@ -166,6 +215,10 @@ template $Window: Adw.ApplicationWindow {
                         Label {
                           valign: center;
                           label: "🌙";
+
+                          styles [
+                            "title-1",
+                          ]
                         }
 
                         Box {
@@ -178,12 +231,21 @@ template $Window: Adw.ApplicationWindow {
                             xalign: 0;
                             wrap: true;
                             label: _("work on rockbox theme");
+
+                            styles [
+                              "heading",
+                            ]
                           }
 
                           Label {
                             halign: start;
                             xalign: 0;
                             label: "20:30";
+
+                            styles [
+                              "caption",
+                              "dim-label",
+                            ]
                           }
                         }
                       }
