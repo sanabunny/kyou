@@ -3,37 +3,239 @@ using Adw 1;
 
 template $Window: Adw.ApplicationWindow {
   title: _("Kyou");
-  default-width: 800;
-  default-height: 600;
-
-  ShortcutController {
-    Shortcut {
-      trigger: "<Control>w";
-      action: "action(window.close)";
-    }
-  }
+  default-width: 360;
+  default-height: 680;
 
   content: Adw.ToolbarView {
-    [top]
-    Adw.HeaderBar {
-      [end]
-      MenuButton {
-        tooltip-text: _("Main Menu");
-        icon-name: "open-menu-symbolic";
-        primary: true;
+    content: Overlay {
+      child: Adw.ViewStack view_stack {
+        Adw.ViewStackPage {
+          name: "today";
+          title: _("Today");
+          icon-name: "x-office-calendar-symbolic";
 
-        menu-model: menu {
-          item (_("About Kyou"), "app.about")
-        };
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              [end]
+              MenuButton {
+                tooltip-text: _("Main Menu");
+                icon-name: "open-menu-symbolic";
+                primary: true;
+
+                menu-model: menu {
+                  item (_("About Kyou"), "app.about")
+                };
+              }
+            }
+
+            content: ScrolledWindow {
+              hscrollbar-policy: never;
+              vscrollbar-policy: automatic;
+
+              child: Adw.Clamp {
+                maximum-size: 800;
+                tightening-threshold: 600;
+
+                child: Box {
+                  orientation: vertical;
+                  spacing: 28;
+                  margin-top: 16;
+                  margin-bottom: 64;
+                  margin-start: 24;
+                  margin-end: 24;
+
+                  Box {
+                    orientation: vertical;
+
+                    Label greeting_label {
+                      halign: start;
+                      label: _("good morning 🌸");
+                    }
+
+                    Label date_label {
+                      halign: start;
+                      label: _("wednesday, 29 july");
+                    }
+                  }
+
+                  ListBox {
+                    selection-mode: none;
+
+                    styles [
+                      "boxed-list",
+                    ]
+
+                    // --- placeholder: "now" card ---
+                    Box {
+                      orientation: vertical;
+                      spacing: 4;
+
+                      Label {
+                        halign: start;
+                        label: "NOW";
+                      }
+
+                      Box {
+                        orientation: horizontal;
+                        spacing: 12;
+                        valign: center;
+
+                        Label {
+                          valign: center;
+                          label: "⏰";
+                        }
+
+                        Box {
+                          orientation: vertical;
+                          spacing: 2;
+                          hexpand: true;
+
+                          Label {
+                            halign: start;
+                            xalign: 0;
+                            wrap: true;
+                            label: _("driving lesson");
+                          }
+
+                          Label {
+                            halign: start;
+                            xalign: 0;
+                            label: "15:00";
+                          }
+                        }
+                      }
+                    }
+
+                    // --- placeholder: "next" card ---
+                    Box {
+                      orientation: vertical;
+                      spacing: 4;
+
+                      Label {
+                        halign: start;
+                        label: "NEXT";
+                      }
+
+                      Box {
+                        orientation: horizontal;
+                        spacing: 12;
+                        valign: center;
+
+                        Label {
+                          valign: center;
+                          label: "📝";
+                        }
+
+                        Box {
+                          orientation: vertical;
+                          spacing: 2;
+                          hexpand: true;
+
+                          Label {
+                            halign: start;
+                            xalign: 0;
+                            wrap: true;
+                            label: _("feed my cat 🐈");
+                          }
+
+                          Label {
+                            halign: start;
+                            xalign: 0;
+                            label: "18:00";
+                          }
+                        }
+                      }
+                    }
+
+                    // --- placeholder: "later" card ---
+                    Box {
+                      orientation: vertical;
+                      spacing: 4;
+
+                      Label {
+                        halign: start;
+                        label: "LATER";
+                      }
+
+                      Box {
+                        orientation: horizontal;
+                        spacing: 12;
+                        valign: center;
+
+                        Label {
+                          valign: center;
+                          label: "🌙";
+                        }
+
+                        Box {
+                          orientation: vertical;
+                          spacing: 2;
+                          hexpand: true;
+
+                          Label {
+                            halign: start;
+                            xalign: 0;
+                            wrap: true;
+                            label: _("work on rockbox theme");
+                          }
+
+                          Label {
+                            halign: start;
+                            xalign: 0;
+                            label: "20:30";
+                          }
+                        }
+                      }
+                    }
+                  }
+                };
+              };
+            };
+          };
+        }
+
+        Adw.ViewStackPage {
+          name: "reminders";
+          title: _("Reminders");
+          icon-name: "edit-paste-symbolic";
+
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              [end]
+              MenuButton {
+                tooltip-text: _("Main Menu");
+                icon-name: "open-menu-symbolic";
+                primary: true;
+
+                menu-model: menu {
+                  item (_("About Kyou"), "app.about")
+                };
+              }
+
+              [end]
+              MenuButton {
+                tooltip-text: _("Create Item");
+                icon-name: "list-add-symbolic";
+              }
+            }
+
+            content: ScrolledWindow {
+              hscrollbar-policy: never;
+              vscrollbar-policy: automatic;
+            };
+          };
+        }
+      };
+
+      [overlay]
+      Adw.ViewSwitcherBar {
+        stack: view_stack;
+        reveal: true;
+        valign: end;
+        halign: center;
       }
-    }
-
-    content: Label {
-      label: _("Hello, World!");
-
-      styles [
-        "title-1",
-      ]
     };
   };
 }
