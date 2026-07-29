@@ -23,6 +23,6 @@ fi
 SITE_PACKAGES="$(dirname "$KYOU_PKG_DIR")"
 
 GSETTINGS_SCHEMA_DIR="$PREFIX/share/glib-2.0/schemas" \
-XDG_DATA_DIRS="$PREFIX/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}" \
+XDG_DATA_DIRS="$PREFIX/share:${XDG_DATA_DIRS:-/opt/homebrew/share:/usr/local/share:/usr/share}" \
 PYTHONPATH="$SITE_PACKAGES" \
 "$PREFIX/bin/kyou"
