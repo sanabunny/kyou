@@ -3,11 +3,17 @@
 :root {
   --window-bg-color: oklch(0.97 0.02 75);
   --window-fg-color: oklch(0.32 0.06 50);
+  --card-bg-color: oklch(1 0 0 / 0.95);
+  --card-now-bg-color: oklch(0.9 0.05 70 / 0.95);
+  --card-fg-color: oklch(0.32 0.06 50 / 0.95);
 }
 
 window.dark-mode {
-  --window-bg-color: oklch(0.22 0.02 50);
-  --window-fg-color: oklch(0.93 0.02 75);
+  --window-bg-color: oklch(0.3 0.025 50);
+  --window-fg-color: oklch(0.94 0.02 75);
+  --card-bg-color: oklch(0.24 0.02 50 / 0.95);
+  --card-now-bg-color: oklch(0.34 0.05 60 / 0.95);
+  --card-fg-color: oklch(0.95 0.03 75 / 0.97);
 }
 
 viewswitcherbar {
@@ -104,15 +110,23 @@ window {
 }
 
 window.dark-mode {
-  background-image: linear-gradient(
-    to right,
-    transparent 0px,
-    transparent 55px,
-    oklch(0.65 0.2 25 / 0.3) 55px,
-    oklch(0.65 0.2 25 / 0.3) 56px,
-    transparent 56px,
-    transparent 100%
-  );
+  background-image:
+    linear-gradient(
+      to right,
+      transparent 0px,
+      transparent 6%,
+      oklch(0.65 0.2 25 / 0.3) 6%,
+      oklch(0.65 0.2 25 / 0.3) 6.1%,
+      transparent 6.1%,
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      oklch(1 0 0 / 0.045) 31px,
+      oklch(1 0 0 / 0.045) 32px
+    );
+  background-position: 0 15px;
 }
 
 headerbar {
@@ -127,6 +141,17 @@ headerbar {
     0 2px 6px oklch(0.3 0.05 50 / 0.5);
 }
 
+window.dark-mode headerbar {
+  background-image: linear-gradient(
+    180deg,
+    oklch(0.3 0.04 52) 0%,
+    oklch(0.22 0.03 48) 100%
+  );
+  box-shadow:
+    0 4px 12px oklch(0 0 0 / 0.4),
+    0 1px 0 oklch(1 0 0 / 0.06) inset;
+}
+
 headerbar windowtitle,
 headerbar label {
   color: oklch(0.96 0.02 80);
@@ -139,16 +164,22 @@ headerbar button {
 
 .card {
   border-radius: 24px;
-  background-color: oklch(1 0 0 / 0.95);
+  background-color: var(--card-bg-color);
+  color: var(--card-fg-color);
   box-shadow:
     0 12px 20px oklch(0.3 0.05 50 / 0.2),
     0 2px 4px oklch(0.3 0.05 50 / 0.12);
 }
 
 .card-now {
-  outline: 2px dashed oklch(0.5 0.05 70 / 0.25);
+  outline: 2px dashed oklch(0.5 0.05 70 / 0.3);
   outline-offset: -6px;
-  background-color: oklch(0.9 0.05 70 / 0.95);
+  background-color: var(--card-now-bg-color);
+  color: var(--card-fg-color);
+}
+
+.card-now .caption-heading.accent {
+  color: oklch(0.55 0.2 350);
 }
 
 window.dark-mode .card {
@@ -156,6 +187,14 @@ window.dark-mode .card {
   box-shadow:
     0 18px 28px oklch(0 0 0 / 0.45),
     0 4px 8px oklch(0 0 0 / 0.3);
+}
+
+window.dark-mode .card-now {
+  outline-color: oklch(0.7 0.08 70 / 0.5);
+  box-shadow:
+    0 0 32px oklch(0.75 0.12 70 / 0.28),
+    0 18px 28px oklch(0 0 0 / 0.5),
+    0 4px 8px oklch(0 0 0 / 0.35);
 }
 
 .card .title-1 {
@@ -199,31 +238,41 @@ window.dark-mode .card {
 .washi-tape {
   margin-top: -4px;
   transform: rotate(-6deg);
-  background-image: repeating-linear-gradient(
-    45deg,
-    oklch(0.85 0.08 350 / 0.85) 0px,
-    oklch(0.85 0.08 350 / 0.85) 7px,
-    oklch(0.92 0.06 350 / 0.7) 7px,
-    oklch(0.92 0.06 350 / 0.7) 14px
-  );
-  border: 2px solid oklch(1 0 0 / 0.6);
+  background-image:
+    linear-gradient(oklch(1 0 0 / 0.35), transparent 40%),
+    repeating-linear-gradient(
+      45deg,
+      oklch(0.78 0.14 350 / 0.92) 0px,
+      oklch(0.78 0.14 350 / 0.92) 7px,
+      oklch(0.9 0.1 350 / 0.75) 7px,
+      oklch(0.9 0.1 350 / 0.75) 14px
+    );
+  border: 2px solid oklch(1 0 0 / 0.7);
   border-radius: 3px;
-  box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.25);
+  box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.3);
 }
 
 .washi-tape-right {
   margin-top: -4px;
   transform: rotate(9deg);
-  background-image: repeating-linear-gradient(
-    45deg,
-    oklch(0.82 0.06 150 / 0.85) 0px,
-    oklch(0.82 0.06 150 / 0.85) 7px,
-    oklch(0.9 0.05 150 / 0.7) 7px,
-    oklch(0.9 0.05 150 / 0.7) 14px
-  );
-  border: 2px solid oklch(1 0 0 / 0.6);
+  background-image:
+    linear-gradient(oklch(1 0 0 / 0.35), transparent 40%),
+    repeating-linear-gradient(
+      45deg,
+      oklch(0.72 0.13 150 / 0.92) 0px,
+      oklch(0.72 0.13 150 / 0.92) 7px,
+      oklch(0.85 0.09 150 / 0.75) 7px,
+      oklch(0.85 0.09 150 / 0.75) 14px
+    );
+  border: 2px solid oklch(1 0 0 / 0.7);
   border-radius: 3px;
-  box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.25);
+  box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.3);
+}
+
+window.dark-mode .washi-tape,
+window.dark-mode .washi-tape-right {
+  border-color: oklch(0.3 0.02 50 / 0.5);
+  box-shadow: 0 4px 6px oklch(0 0 0 / 0.4);
 }
 
 .pin-sticker {
