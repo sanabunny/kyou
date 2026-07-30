@@ -1,17 +1,17 @@
 /*for reference, the window radius is 16px on macos*/
 
 :root {
-  --window-bg-color: oklch(0.97 0.02 80);
+  --window-bg-color: oklch(0.97 0.02 75);
   --window-fg-color: oklch(0.32 0.06 50);
 }
 
 window.dark-mode {
   --window-bg-color: oklch(0.22 0.02 50);
-  --window-fg-color: oklch(0.93 0.02 80);
+  --window-fg-color: oklch(0.93 0.02 75);
 }
 
 viewswitcherbar {
-  background-color: oklch(0.97 0.02 80 / 0.5);
+  background-color: oklch(0.97 0.02 75 / 0.5);
   border: 1px solid oklch(0.5 0.06 55 / 0.15);
   border-radius: 999px;
   margin: 0 1.25rem 1.25rem 1.25rem;
