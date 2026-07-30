@@ -4,7 +4,7 @@ using Adw 1;
 template $Window: Adw.ApplicationWindow {
   title: _("Kyou");
   default-width: 360;
-  default-height: 680;
+  default-height: 720;
 
   content: Adw.ToolbarView {
     content: Overlay {
@@ -39,8 +39,8 @@ template $Window: Adw.ApplicationWindow {
 
                 child: Box {
                   orientation: vertical;
-                  spacing: 32;
-                  margin-top: 32;
+                  spacing: 24;
+                  margin-top: 34;
                   margin-bottom: 80;
                   margin-start: 28;
                   margin-end: 28;
@@ -51,10 +51,11 @@ template $Window: Adw.ApplicationWindow {
 
                     Label greeting_label {
                       halign: start;
-                      label: _("good morning 🌸");
+                      label: _("good morning! 🌸");
 
                       styles [
                         "title-1",
+                        "kyou-greeting"
                       ]
                     }
 
@@ -70,77 +71,95 @@ template $Window: Adw.ApplicationWindow {
 
                   Box {
                     orientation: vertical;
-                    spacing: 0;
+                    spacing: 4;
 
-                    Box {
-                      orientation: vertical;
-                      spacing: 8;
+                    Overlay {
                       margin-bottom: 16;
                       margin-start: 16;
                       margin-end: 16;
                       margin-top: 16;
 
-                      styles [
-                        "card",
-                      ]
-
-                      Label {
-                        halign: start;
-                        label: "14:15 · NOW";
-                        margin-top: 16;
-                        margin-start: 20;
-                        margin-end: 20;
+                      child: Box {
+                        orientation: vertical;
+                        spacing: 10;
 
                         styles [
-                          "caption-heading",
-                          "accent",
+                          "card",
+                          "tilt-left",
+                          "card-now"
                         ]
-                      }
-
-                      Box {
-                        orientation: horizontal;
-                        spacing: 16;
-                        valign: center;
-                        margin-start: 20;
-                        margin-end: 20;
-                        margin-bottom: 16;
 
                         Label {
-                          valign: center;
-                          label: "⏰";
+                          halign: start;
+                          label: "14:15 · NOW";
+                          margin-top: 24;
+                          margin-start: 28;
+                          margin-end: 28;
 
                           styles [
-                            "title-1",
+                            "caption-heading",
+                            "accent",
                           ]
                         }
 
                         Box {
-                          orientation: vertical;
-                          spacing: 4;
-                          hexpand: true;
+                          orientation: horizontal;
+                          spacing: 24;
+                          valign: center;
+                          margin-start: 28;
+                          margin-end: 28;
+                          margin-bottom: 28;
 
                           Label {
-                            halign: start;
-                            xalign: 0;
-                            wrap: true;
-                            label: _("water the plants 🪴");
+                            valign: center;
+                            label: "⏰";
 
                             styles [
-                              "heading",
+                              "title-1",
                             ]
                           }
 
-                          Label {
-                            halign: start;
-                            xalign: 0;
-                            label: _("1h 15m");
+                          Box {
+                            orientation: vertical;
+                            spacing: 6;
+                            hexpand: true;
 
-                            styles [
-                              "caption",
-                              "dim-label",
-                            ]
+                            Label {
+                              halign: start;
+                              xalign: 0;
+                              wrap: true;
+                              label: _("water the plants 🪴");
+
+                              styles [
+                                "heading",
+                              ]
+                            }
+
+                            Label {
+                              halign: start;
+                              xalign: 0;
+                              label: _("1h 15m");
+
+                              styles [
+                                "caption",
+                                "dim-label",
+                              ]
+                            }
                           }
                         }
+                      };
+
+                      [overlay]
+                      Box {
+                        width-request: 56;
+                        height-request: 20;
+                        halign: end;
+                        valign: start;
+                        margin-end: 48;
+
+                        styles [
+                          "washi-tape",
+                        ]
                       }
                     }
 
@@ -166,75 +185,92 @@ template $Window: Adw.ApplicationWindow {
                       }
                     }
 
-                    Box {
-                      orientation: vertical;
-                      spacing: 8;
+                    Overlay {
                       margin-top: 16;
                       margin-bottom: 16;
                       margin-start: 16;
                       margin-end: 16;
 
-                      styles [
-                        "card",
-                      ]
-
-                      Label {
-                        halign: start;
-                        label: "15:30";
-                        margin-top: 16;
-                        margin-start: 20;
-                        margin-end: 20;
+                      child: Box {
+                        orientation: vertical;
+                        spacing: 2;
 
                         styles [
-                          "caption-heading",
-                          "dim-label",
+                          "card",
+                          "tilt-right",
                         ]
-                      }
-
-                      Box {
-                        orientation: horizontal;
-                        spacing: 16;
-                        valign: center;
-                        margin-start: 20;
-                        margin-end: 20;
-                        margin-bottom: 16;
 
                         Label {
-                          valign: center;
-                          label: "📝";
+                          halign: start;
+                          label: "15:30";
+                          margin-top: 10;
+                          margin-start: 14;
+                          margin-end: 14;
 
                           styles [
-                            "title-1",
+                            "caption-heading",
+                            "dim-label",
                           ]
                         }
 
                         Box {
-                          orientation: vertical;
-                          spacing: 4;
-                          hexpand: true;
+                          orientation: horizontal;
+                          spacing: 10;
+                          valign: center;
+                          margin-start: 14;
+                          margin-end: 14;
+                          margin-bottom: 10;
 
                           Label {
-                            halign: start;
-                            xalign: 0;
-                            wrap: true;
-                            label: _("reply to emails 📩");
+                            valign: center;
+                            label: "📝";
 
                             styles [
-                              "heading",
+                              "title-1",
                             ]
                           }
 
-                          Label {
-                            halign: start;
-                            xalign: 0;
-                            label: _("15m");
+                          Box {
+                            orientation: vertical;
+                            spacing: 2;
+                            hexpand: true;
 
-                            styles [
-                              "caption",
-                              "dim-label",
-                            ]
+                            Label {
+                              halign: start;
+                              xalign: 0;
+                              wrap: true;
+                              label: _("reply to emails 📩");
+
+                              styles [
+                                "heading",
+                              ]
+                            }
+
+                            Label {
+                              halign: start;
+                              xalign: 0;
+                              label: _("15m");
+
+                              styles [
+                                "caption",
+                                "dim-label",
+                              ]
+                            }
                           }
                         }
+                      };
+
+                      [overlay]
+                      Box {
+                        width-request: 48;
+                        height-request: 20;
+                        halign: end;
+                        valign: start;
+                        margin-end: 28;
+
+                        styles [
+                          "washi-tape-right",
+                        ]
                       }
                     }
 
@@ -260,75 +296,92 @@ template $Window: Adw.ApplicationWindow {
                       }
                     }
 
-                    Box {
-                      orientation: vertical;
-                      spacing: 8;
+                    Overlay {
                       margin-top: 16;
                       margin-bottom: 16;
                       margin-start: 16;
                       margin-end: 16;
 
-                      styles [
-                        "card",
-                      ]
-
-                      Label {
-                        halign: start;
-                        label: "18:30";
-                        margin-top: 16;
-                        margin-start: 20;
-                        margin-end: 20;
+                      child: Box {
+                        orientation: vertical;
+                        spacing: 2;
 
                         styles [
-                          "caption-heading",
-                          "dim-label",
+                          "card",
+                          "tilt-left",
                         ]
-                      }
-
-                      Box {
-                        orientation: horizontal;
-                        spacing: 16;
-                        valign: center;
-                        margin-start: 20;
-                        margin-end: 20;
-                        margin-bottom: 16;
 
                         Label {
-                          valign: center;
-                          label: "🌙";
+                          halign: start;
+                          label: "18:30";
+                          margin-top: 10;
+                          margin-start: 14;
+                          margin-end: 14;
 
                           styles [
-                            "title-1",
+                            "caption-heading",
+                            "dim-label",
                           ]
                         }
 
                         Box {
-                          orientation: vertical;
-                          spacing: 4;
-                          hexpand: true;
+                          orientation: horizontal;
+                          spacing: 10;
+                          valign: center;
+                          margin-start: 14;
+                          margin-end: 14;
+                          margin-bottom: 10;
 
                           Label {
-                            halign: start;
-                            xalign: 0;
-                            wrap: true;
-                            label: _("read a chapter 📚");
+                            valign: center;
+                            label: "🌙";
 
                             styles [
-                              "heading",
+                              "title-1",
                             ]
                           }
 
-                          Label {
-                            halign: start;
-                            xalign: 0;
-                            label: _("1h");
+                          Box {
+                            orientation: vertical;
+                            spacing: 2;
+                            hexpand: true;
 
-                            styles [
-                              "caption",
-                              "dim-label",
-                            ]
+                            Label {
+                              halign: start;
+                              xalign: 0;
+                              wrap: true;
+                              label: _("read a chapter 📚");
+
+                              styles [
+                                "heading",
+                              ]
+                            }
+
+                            Label {
+                              halign: start;
+                              xalign: 0;
+                              label: _("1h");
+
+                              styles [
+                                "caption",
+                                "dim-label",
+                              ]
+                            }
                           }
                         }
+                      };
+
+                      [overlay]
+                      Label {
+                        halign: end;
+                        valign: start;
+                        margin-end: 12;
+                        label: "📌";
+
+                        styles [
+                          "title-1",
+                          "pin-sticker",
+                        ]
                       }
                     }
 

@@ -1,19 +1,22 @@
+/*for reference, the window radius is 16px on macos*/
+
 :root {
-  --window-bg-color: oklch(0.97 0.02 75);
+  --window-bg-color: oklch(0.97 0.02 90);
   --window-fg-color: oklch(0.32 0.06 50);
 }
 
 window.dark-mode {
   --window-bg-color: oklch(0.22 0.02 50);
-  --window-fg-color: oklch(0.93 0.02 75);
+  --window-fg-color: oklch(0.93 0.02 90);
 }
 
 viewswitcherbar {
-  background-color: oklch(0.94 0.02 70 / 0.75);
+  background-color: oklch(0.97 0.02 90 / 0.5);
   border: 1px solid oklch(0.5 0.06 55 / 0.15);
   border-radius: 999px;
   margin: 0 1.25rem 1.25rem 1.25rem;
   padding: 0.25rem;
+  backdrop-filter: blur(6px) saturate(1.25);
   box-shadow:
     0 8px 32px oklch(0 0 0 / 0.06),
     0 2px 8px oklch(0 0 0 / 0.03),
@@ -58,4 +61,171 @@ window.dark-mode viewswitcherbar button {
 
 window.dark-mode viewswitcherbar button:checked {
   color: var(--accent-color);
+}
+
+.title-1,
+.title-2,
+.heading {
+  font-family: "Fraunces", serif;
+}
+
+.title-1 {
+  font-weight: 600;
+}
+
+.caption-heading {
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.kyou-greeting {
+  font-size: 2.3rem;
+  font-weight: 700;
+}
+
+window {
+  background-image:
+    linear-gradient(
+      to right,
+      transparent 0px,
+      transparent 6%,
+      oklch(0.6 0.2 25 / 0.35) 6%,
+      oklch(0.6 0.2 25 / 0.35) 6.1%,
+      transparent 6.1%,
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      oklch(0.5 0.06 55 / 0.08) 31px,
+      oklch(0.5 0.06 55 / 0.08) 32px
+    );
+  background-position: 0 15px;
+}
+
+window.dark-mode {
+  background-image: linear-gradient(
+    to right,
+    transparent 0px,
+    transparent 55px,
+    oklch(0.65 0.2 25 / 0.3) 55px,
+    oklch(0.65 0.2 25 / 0.3) 56px,
+    transparent 56px,
+    transparent 100%
+  );
+}
+
+headerbar {
+  background-image: linear-gradient(
+    180deg,
+    oklch(0.4 0.06 55) 0%,
+    oklch(0.3 0.05 50) 100%
+  );
+  color: oklch(0.96 0.02 80);
+  box-shadow:
+    0 4px 12px oklch(0.3 0.05 50 / 0.25),
+    0 2px 6px oklch(0.3 0.05 50 / 0.5);
+}
+
+headerbar windowtitle,
+headerbar label {
+  color: oklch(0.96 0.02 80);
+}
+
+headerbar button image,
+headerbar button {
+  color: oklch(0.96 0.02 80);
+}
+
+.card {
+  border-radius: 24px;
+  background-color: oklch(1 0 0 / 0.95);
+  box-shadow:
+    0 12px 20px oklch(0.3 0.05 50 / 0.2),
+    0 2px 4px oklch(0.3 0.05 50 / 0.12);
+}
+
+.card-now {
+  outline: 2px dashed oklch(0.5 0.05 70 / 0.25);
+  outline-offset: -6px;
+  background-color: oklch(0.9 0.05 70 / 0.95);
+}
+
+window.dark-mode .card {
+  border-color: oklch(0.3 0.03 55 / 0.9);
+  box-shadow:
+    0 18px 28px oklch(0 0 0 / 0.45),
+    0 4px 8px oklch(0 0 0 / 0.3);
+}
+
+.card .title-1 {
+  font-size: 1.4rem;
+}
+
+.card .heading {
+  font-size: 1.1rem;
+}
+.card .caption-heading {
+  font-size: 0.8rem;
+}
+.card .caption {
+  font-size: 0.85rem;
+}
+
+.card-now .title-1 {
+  font-size: 2.2rem;
+}
+
+.card-now .heading {
+  font-size: 1.7rem;
+}
+
+.card-now .caption-heading {
+  font-size: 1rem;
+}
+
+.card-now .caption {
+  font-size: 1.05rem;
+}
+
+.tilt-left {
+  transform: rotate(-2deg);
+}
+
+.tilt-right {
+  transform: rotate(1.5deg);
+}
+
+.washi-tape {
+  margin-top: -4px;
+  transform: rotate(-6deg);
+  background-image: repeating-linear-gradient(
+    45deg,
+    oklch(0.85 0.08 350 / 0.85) 0px,
+    oklch(0.85 0.08 350 / 0.85) 7px,
+    oklch(0.92 0.06 350 / 0.7) 7px,
+    oklch(0.92 0.06 350 / 0.7) 14px
+  );
+  border: 2px solid oklch(1 0 0 / 0.6);
+  border-radius: 3px;
+  box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.25);
+}
+
+.washi-tape-right {
+  margin-top: -4px;
+  transform: rotate(9deg);
+  background-image: repeating-linear-gradient(
+    45deg,
+    oklch(0.82 0.06 150 / 0.85) 0px,
+    oklch(0.82 0.06 150 / 0.85) 7px,
+    oklch(0.9 0.05 150 / 0.7) 7px,
+    oklch(0.9 0.05 150 / 0.7) 14px
+  );
+  border: 2px solid oklch(1 0 0 / 0.6);
+  border-radius: 3px;
+  box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.25);
+}
+
+.pin-sticker {
+  margin-top: -10px;
 }
