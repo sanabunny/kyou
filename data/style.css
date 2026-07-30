@@ -238,40 +238,41 @@ window.dark-mode .card-now {
 .washi-tape {
   margin-top: -4px;
   transform: rotate(-6deg);
+  background-color: oklch(0.9 0.06 15 / 0.88);
   background-image:
-    linear-gradient(oklch(1 0 0 / 0.35), transparent 40%),
+    linear-gradient(oklch(1 0 0 / 0.25), transparent 55%),
     repeating-linear-gradient(
-      45deg,
-      oklch(0.78 0.14 350 / 0.92) 0px,
-      oklch(0.78 0.14 350 / 0.92) 7px,
-      oklch(0.9 0.1 350 / 0.75) 7px,
-      oklch(0.9 0.1 350 / 0.75) 14px
+      0deg,
+      oklch(0.65 0.15 20 / 0.55) 0px,
+      oklch(0.65 0.15 20 / 0.55) 1.5px,
+      transparent 1.5px,
+      transparent 9px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      oklch(0.65 0.15 20 / 0.55) 0px,
+      oklch(0.65 0.15 20 / 0.55) 1.5px,
+      transparent 1.5px,
+      transparent 9px
     );
-  border: 2px solid oklch(1 0 0 / 0.7);
-  border-radius: 3px;
+  border-radius: 2px;
   box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.3);
 }
 
 .washi-tape-right {
   margin-top: -4px;
   transform: rotate(9deg);
+  background-color: oklch(0.78 0.11 175 / 0.88);
   background-image:
-    linear-gradient(oklch(1 0 0 / 0.35), transparent 40%),
-    repeating-linear-gradient(
-      45deg,
-      oklch(0.72 0.13 150 / 0.92) 0px,
-      oklch(0.72 0.13 150 / 0.92) 7px,
-      oklch(0.85 0.09 150 / 0.75) 7px,
-      oklch(0.85 0.09 150 / 0.75) 14px
-    );
-  border: 2px solid oklch(1 0 0 / 0.7);
-  border-radius: 3px;
+    linear-gradient(oklch(1 0 0 / 0.2), transparent 55%),
+    radial-gradient(circle, oklch(1 0 0 / 0.85) 1.6px, transparent 1.8px);
+  background-size: auto, 9px 9px;
+  border-radius: 2px;
   box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.3);
 }
 
 window.dark-mode .washi-tape,
 window.dark-mode .washi-tape-right {
-  border-color: oklch(0.3 0.02 50 / 0.5);
   box-shadow: 0 4px 6px oklch(0 0 0 / 0.4);
 }
 
