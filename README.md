@@ -1,4 +1,10 @@
+<div align="center">
+  
 # Kyou
+  
+<img width="410" height="770" alt="image" src="https://github.com/user-attachments/assets/3335d4ba-06e0-4f88-b91a-07045c8f26b2" />
+</div>
+
 
 Kyou (今日 — "today" in Japanese) is a small app I made to help me manage my tasks for the day.
 
