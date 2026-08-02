@@ -161,13 +161,18 @@ headerbar label {
   color: oklch(0.96 0.02 80);
 }
 
+popover contents,
+popover contents label {
+  color: var(--window-fg-color);
+}
+
 headerbar button image,
 headerbar button {
   color: oklch(0.96 0.02 80);
 }
 
 .card {
-  border-radius: 24px;
+  border-radius: calc(var(--window-radius) * 1.5);
   background-color: var(--card-bg-color);
   color: var(--card-fg-color);
   box-shadow:

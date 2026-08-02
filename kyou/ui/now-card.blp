@@ -1,0 +1,97 @@
+using Gtk 4.0;
+
+template $NowCard: Overlay {
+  margin-top: 16;
+  margin-bottom: 16;
+  margin-start: 16;
+  margin-end: 16;
+
+  child: Box card_box {
+    orientation: vertical;
+    spacing: 8;
+
+    styles [
+      "card",
+      "card-now",
+    ]
+
+    Label time_label {
+      halign: start;
+      margin-top: 20;
+      margin-start: 24;
+      margin-end: 24;
+
+      styles [
+        "caption-heading",
+        "accent",
+      ]
+    }
+
+    Box content_row {
+      orientation: horizontal;
+      spacing: 26;
+      valign: center;
+      margin-start: 24;
+      margin-end: 24;
+      margin-bottom: 22;
+
+      Label icon_label {
+        valign: center;
+
+        styles [
+          "title-1",
+        ]
+      }
+
+      Box text_box {
+        orientation: vertical;
+        spacing: 4;
+        hexpand: true;
+
+        Label title_label {
+          halign: start;
+          xalign: 0;
+          wrap: true;
+
+          styles [
+            "heading",
+          ]
+        }
+
+        Label subtitle_label {
+          halign: start;
+          xalign: 0;
+
+          styles [
+            "caption",
+            "dim-label",
+          ]
+        }
+      }
+    }
+  };
+
+  [overlay]
+  Box sticker_box {
+    width-request: 48;
+    height-request: 20;
+    halign: end;
+    valign: start;
+    margin-end: 28;
+    visible: false;
+  }
+
+  [overlay]
+  Label sticker_label {
+    halign: end;
+    valign: start;
+    margin-end: 12;
+    label: "📌";
+    visible: false;
+
+    styles [
+      "title-1",
+      "pin-sticker",
+    ]
+  }
+}

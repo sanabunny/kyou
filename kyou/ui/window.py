@@ -3,6 +3,9 @@ from typing import Any
 from gi.repository import Adw, Gtk
 
 from kyou.config import PREFIX
+from kyou.ui.gap_row import GapRow
+from kyou.ui.now_card import NowCard
+from kyou.ui.today_card import TodayCard
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/window.ui")

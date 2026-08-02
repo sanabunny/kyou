@@ -2,5 +2,8 @@
 <gresources>
   <gresource prefix="@PREFIX@">
     <file>window.ui</file>
+    <file>today-card.ui</file>
+    <file>now-card.ui</file>
+    <file>gap-row.ui</file>
   </gresource>
 </gresources>

@@ -1,0 +1,19 @@
+using Gtk 4.0;
+
+template $GapRow: Box {
+  orientation: horizontal;
+  spacing: 8;
+  halign: start;
+  margin-start: 16;
+  margin-top: 4;
+  margin-bottom: 4;
+
+  Label emoji_label {}
+
+  Label text_label {
+    styles [
+      "caption",
+      "dim-label",
+    ]
+  }
+}

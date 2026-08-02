@@ -1,10 +1,10 @@
 python.install_sources(
-    files('__init__.py', 'window.py'),
+    files('__init__.py', 'window.py', 'today_card.py', 'now_card.py', 'gap_row.py'),
     subdir: 'kyou' / 'ui',
 )
 
 blueprints = custom_target(
-    input: files('window.blp'),
+    input: files('window.blp', 'today-card.blp', 'now-card.blp', 'gap-row.blp'),
     output: '.',
     command: [
         blueprint_compiler,

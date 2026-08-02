@@ -73,338 +73,46 @@ template $Window: Adw.ApplicationWindow {
                     orientation: vertical;
                     spacing: 4;
 
-                    Overlay {
-                      margin-bottom: 16;
-                      margin-start: 16;
-                      margin-end: 16;
-                      margin-top: 16;
-
-                      child: Box {
-                        orientation: vertical;
-                        spacing: 10;
-
-                        styles [
-                          "card",
-                          "tilt-left",
-                          "card-now"
-                        ]
-
-                        Label {
-                          halign: start;
-                          label: "14:15 · NOW";
-                          margin-top: 24;
-                          margin-start: 28;
-                          margin-end: 28;
-
-                          styles [
-                            "caption-heading",
-                            "accent",
-                          ]
-                        }
-
-                        Box {
-                          orientation: horizontal;
-                          spacing: 24;
-                          valign: center;
-                          margin-start: 28;
-                          margin-end: 28;
-                          margin-bottom: 28;
-
-                          Label {
-                            valign: center;
-                            label: "⏰";
-
-                            styles [
-                              "title-1",
-                            ]
-                          }
-
-                          Box {
-                            orientation: vertical;
-                            spacing: 6;
-                            hexpand: true;
-
-                            Label {
-                              halign: start;
-                              xalign: 0;
-                              wrap: true;
-                              label: _("water the plants 🪴");
-
-                              styles [
-                                "heading",
-                              ]
-                            }
-
-                            Label {
-                              halign: start;
-                              xalign: 0;
-                              label: _("1h 15m");
-
-                              styles [
-                                "caption",
-                                "dim-label",
-                              ]
-                            }
-                          }
-                        }
-                      };
-
-                      [overlay]
-                      Box {
-                        width-request: 56;
-                        height-request: 20;
-                        halign: end;
-                        valign: start;
-                        margin-end: 48;
-
-                        styles [
-                          "washi-tape",
-                        ]
-                      }
+                    $NowCard {
+                      icon-text: "⏰";
+                      time-text: "14:15 · NOW";
+                      title-text: _("water the plants 🪴");
+                      subtitle-text: _("1h 15m");
+                      tilt-class: "tilt-left";
+                      sticker-type: "washi-tape";
                     }
 
-                    Box {
-                      orientation: horizontal;
-                      spacing: 8;
-                      halign: start;
-                      margin-start: 16;
-                      margin-top: 4;
-                      margin-bottom: 4;
-
-                      Label {
-                        label: "☕";
-                      }
-
-                      Label {
-                        label: _("15m break");
-
-                        styles [
-                          "caption",
-                          "dim-label",
-                        ]
-                      }
+                    $GapRow {
+                      emoji-text: "☕";
+                      text-text: _("15m break");
                     }
 
-                    Overlay {
-                      margin-top: 16;
-                      margin-bottom: 16;
-                      margin-start: 16;
-                      margin-end: 16;
-
-                      child: Box {
-                        orientation: vertical;
-                        spacing: 2;
-
-                        styles [
-                          "card",
-                          "tilt-right",
-                        ]
-
-                        Label {
-                          halign: start;
-                          label: "15:30";
-                          margin-top: 10;
-                          margin-start: 14;
-                          margin-end: 14;
-
-                          styles [
-                            "caption-heading",
-                            "dim-label",
-                          ]
-                        }
-
-                        Box {
-                          orientation: horizontal;
-                          spacing: 10;
-                          valign: center;
-                          margin-start: 14;
-                          margin-end: 14;
-                          margin-bottom: 10;
-
-                          Label {
-                            valign: center;
-                            label: "📝";
-
-                            styles [
-                              "title-1",
-                            ]
-                          }
-
-                          Box {
-                            orientation: vertical;
-                            spacing: 2;
-                            hexpand: true;
-
-                            Label {
-                              halign: start;
-                              xalign: 0;
-                              wrap: true;
-                              label: _("reply to emails 📩");
-
-                              styles [
-                                "heading",
-                              ]
-                            }
-
-                            Label {
-                              halign: start;
-                              xalign: 0;
-                              label: _("15m");
-
-                              styles [
-                                "caption",
-                                "dim-label",
-                              ]
-                            }
-                          }
-                        }
-                      };
-
-                      [overlay]
-                      Box {
-                        width-request: 48;
-                        height-request: 20;
-                        halign: end;
-                        valign: start;
-                        margin-end: 28;
-
-                        styles [
-                          "washi-tape-right",
-                        ]
-                      }
+                    $TodayCard {
+                      icon-text: "📝";
+                      time-text: "15:30";
+                      title-text: _("reply to emails 📩");
+                      subtitle-text: _("15m");
+                      tilt-class: "tilt-right";
+                      sticker-type: "washi-tape-right";
                     }
 
-                    Box {
-                      orientation: horizontal;
-                      spacing: 8;
-                      halign: start;
-                      margin-start: 16;
-                      margin-top: 4;
-                      margin-bottom: 4;
-
-                      Label {
-                        label: "🌤️";
-                      }
-
-                      Label {
-                        label: _("3h free time");
-
-                        styles [
-                          "caption",
-                          "dim-label",
-                        ]
-                      }
+                    $GapRow {
+                      emoji-text: "🌤️";
+                      text-text: _("3h free time");
                     }
 
-                    Overlay {
-                      margin-top: 16;
-                      margin-bottom: 16;
-                      margin-start: 16;
-                      margin-end: 16;
-
-                      child: Box {
-                        orientation: vertical;
-                        spacing: 2;
-
-                        styles [
-                          "card",
-                          "tilt-left",
-                        ]
-
-                        Label {
-                          halign: start;
-                          label: "18:30";
-                          margin-top: 10;
-                          margin-start: 14;
-                          margin-end: 14;
-
-                          styles [
-                            "caption-heading",
-                            "dim-label",
-                          ]
-                        }
-
-                        Box {
-                          orientation: horizontal;
-                          spacing: 10;
-                          valign: center;
-                          margin-start: 14;
-                          margin-end: 14;
-                          margin-bottom: 10;
-
-                          Label {
-                            valign: center;
-                            label: "🌙";
-
-                            styles [
-                              "title-1",
-                            ]
-                          }
-
-                          Box {
-                            orientation: vertical;
-                            spacing: 2;
-                            hexpand: true;
-
-                            Label {
-                              halign: start;
-                              xalign: 0;
-                              wrap: true;
-                              label: _("read a chapter 📚");
-
-                              styles [
-                                "heading",
-                              ]
-                            }
-
-                            Label {
-                              halign: start;
-                              xalign: 0;
-                              label: _("1h");
-
-                              styles [
-                                "caption",
-                                "dim-label",
-                              ]
-                            }
-                          }
-                        }
-                      };
-
-                      [overlay]
-                      Label {
-                        halign: end;
-                        valign: start;
-                        margin-end: 12;
-                        label: "📌";
-
-                        styles [
-                          "title-1",
-                          "pin-sticker",
-                        ]
-                      }
+                    $TodayCard {
+                      icon-text: "🌙";
+                      time-text: "18:30";
+                      title-text: _("read a chapter 📚");
+                      subtitle-text: _("1h");
+                      tilt-class: "tilt-left";
+                      sticker-type: "pin";
                     }
 
-                    Box {
-                      orientation: horizontal;
-                      spacing: 8;
-                      halign: start;
-                      margin-start: 16;
-                      margin-top: 4;
-                      margin-bottom: 4;
-
-                      Label {
-                        label: "🌙";
-                      }
-
-                      Label {
-                        label: _("20m → time left of day");
-
-                        styles [
-                          "caption",
-                          "dim-label",
-                        ]
-                      }
+                    $GapRow {
+                      emoji-text: "🌙";
+                      text-text: _("20m → time left of day");
                     }
                   }
                 };
