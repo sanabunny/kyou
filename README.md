@@ -1,7 +1,7 @@
 <div align="center">
     <img src="data/icons/page.fuwa.kyou.svg" width="128" height="128" />
     <h1>Kyou</h1>
-    <img width="300" alt="image" src="https://github.com/user-attachments/assets/3335d4ba-06e0-4f88-b91a-07045c8f26b2" />
+    <img width="300" alt="image" src="https://github.com/user-attachments/assets/b40b8055-5d11-4bd9-b14d-2f7f83d58b0b" />
 </div>
 
 Kyou (今日 — "today" in Japanese) is a small app I made to help me manage my tasks for the day.
