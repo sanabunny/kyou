@@ -1,5 +1,5 @@
 {
-  "id": "page.fuwa.kyou.Devel",
+  "id": "page.fuwa.kyou",
   "runtime": "org.gnome.Platform",
   "runtime-version": "50",
   "sdk": "org.gnome.Sdk",
@@ -26,7 +26,9 @@
       "name": "kyou",
       "builddir": true,
       "buildsystem": "meson",
-      "config-opts": ["--libdir=lib"],
+      "config-opts": [
+        "--libdir=lib"
+      ],
       "sources": [
         {
           "type": "dir",
