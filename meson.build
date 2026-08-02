@@ -26,21 +26,14 @@ localedir = get_option('prefix') / get_option('localedir')
 bindir = get_option('prefix') / get_option('bindir')
 resourcedir = python.get_install_dir() / 'kyou' / 'resources'
 
-profile = get_option('profile')
-if profile == 'development'
-    app_id = 'page.fuwa.kyou.Devel'
-    prefix = '/page/fuwa/kyou/Devel'
-elif profile == 'release'
-    app_id = 'page.fuwa.kyou'
-    prefix = '/page/fuwa/kyou'
-endif
+app_id = 'page.fuwa.kyou'
+prefix = '/page/fuwa/kyou'
 
 conf = configuration_data(
     {
         'PYTHON': python.full_path(),
         'APP_ID': app_id,
         'PREFIX': prefix,
-        'PROFILE': profile,
         'LOCALEDIR': localedir,
         'BINDIR': bindir,
     },

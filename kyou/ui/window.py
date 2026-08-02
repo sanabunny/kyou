@@ -2,7 +2,7 @@ from typing import Any
 
 from gi.repository import Adw, Gtk
 
-from kyou.config import PREFIX, PROFILE
+from kyou.config import PREFIX
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/window.ui")
@@ -13,9 +13,6 @@ class Window(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-
-        if PROFILE == "development":
-            self.add_css_class("devel")
 
         style_manager = Adw.StyleManager.get_default()
         self._update_color_scheme(style_manager)
