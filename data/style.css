@@ -6,7 +6,6 @@
   --card-bg-color: oklch(1 0 0 / 0.95);
   --card-now-bg-color: oklch(0.9 0.05 70 / 0.95);
   --card-fg-color: oklch(0.32 0.06 50 / 0.95);
-  --window-radius: 20px;
 }
 
 window.dark-mode {
@@ -271,7 +270,9 @@ window.dark-mode .card-now {
   background-image:
     linear-gradient(oklch(1 0 0 / 0.2), transparent 55%),
     radial-gradient(circle, oklch(1 0 0 / 0.85) 1.6px, transparent 1.8px);
-  background-size: auto, 9px 9px;
+  background-size:
+    auto,
+    9px 9px;
   border-radius: 2px;
   box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.3);
 }
