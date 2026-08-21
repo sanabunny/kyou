@@ -1,0 +1,142 @@
+using Gtk 4.0;
+using Adw 1;
+using Granite 7.0;
+
+template $AddItemDialog: Adw.Dialog {
+  title: _("Add task");
+  content-width: 440;
+  focus-widget: title_entry;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: true;
+      show-end-title-buttons: true;
+
+      [end]
+      Button add_button {
+        icon-name: "object-select-symbolic";
+        clicked => $on_add_clicked();
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    content: Adw.Clamp {
+      child: Box {
+        margin-start: 12;
+        margin-end: 12;
+        orientation: vertical;
+        spacing: 12;
+
+        Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            Adw.EntryRow title_entry {
+              title: _("Task Title");
+              activates-default: true;
+            }
+          }
+
+          Adw.PreferencesGroup {
+            Adw.ComboRow item_type {
+              title: _("Type");
+              visible: false;
+
+              model: StringList {
+                strings [
+                  _("Reminder"),
+                  _("Event"),
+                ]
+              };
+            }
+
+            Adw.ComboRow priority {
+              title: _("Priority");
+              visible: false;
+              selected: 1;
+
+              model: StringList {
+                strings [
+                  _("High priority"),
+                  _("Medium priority"),
+                  _("Low priority"),
+                ]
+              };
+            }
+
+            Adw.EntryRow time_entry {
+              title: _("Time of Day");
+
+              [prefix]
+              Image {
+                icon-name: "preferences-system-time-symbolic";
+              }
+            }
+
+            Adw.EntryRow date_entry {
+              title: _("Date");
+              text: "21 Aug 2026";
+
+              [prefix]
+              Image {
+                icon-name: "x-office-calendar-symbolic";
+              }
+            }
+
+            Adw.ActionRow {
+              title: _("Duration");
+
+              [prefix]
+              Image {
+                icon-name: "preferences-system-time-symbolic";
+              }
+
+              [suffix]
+              Label {
+                label: _("30m");
+
+                styles [
+                  "dim-label",
+                ]
+              }
+            }
+
+            Adw.ActionRow {
+              title: _("Repeat");
+
+              [prefix]
+              Image {
+                icon-name: "media-playlist-repeat-symbolic";
+              }
+
+              [suffix]
+              Label {
+                label: _("No repeat");
+
+                styles [
+                  "dim-label",
+                ]
+              }
+            }
+
+            Adw.SwitchRow {
+              title: _("Alarm");
+              subtitle: _("Keeps ringing until you respond");
+              active: true;
+            }
+          }
+
+          Adw.PreferencesGroup {
+            title: _("Sub-tasks");
+
+            Adw.EntryRow {
+              title: _("Notes");
+            }
+          }
+        }
+      };
+    };
+  };
+}

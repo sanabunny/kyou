@@ -142,9 +142,10 @@ template $Window: Adw.ApplicationWindow {
               }
 
               [end]
-              MenuButton {
+              Button add_item_button {
                 tooltip-text: _("Create Item");
                 icon-name: "list-add-symbolic";
+                clicked => $on_add_item_clicked();
               }
             }
 
