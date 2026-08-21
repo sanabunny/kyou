@@ -1,7 +1,7 @@
 /*for reference, the window radius is 16px on macos*/
 
 :root {
-  --kyou-card-radius: 18px;
+  --kyou-card-radius: 16px;
   --window-bg-color: oklch(0.97 0.02 75);
   --window-fg-color: oklch(0.32 0.06 50);
   --card-bg-color: oklch(1 0 0 / 0.95);
@@ -18,14 +18,14 @@ window.dark-mode {
 }
 
 viewswitcherbar {
-  background-color: oklch(0.97 0.02 75 / 0.5);
+  background-color: oklch(0.97 0.02 75 / 0.75);
   border: 1px solid oklch(0.5 0.06 55 / 0.15);
   border-radius: 999px;
   margin: 0 1.25rem 1.25rem 1.25rem;
   padding: 0.25rem;
-  backdrop-filter: blur(6px) saturate(1.25);
+  backdrop-filter: blur(2px) saturate(2);
   box-shadow:
-    0 8px 32px oklch(0 0 0 / 0.06),
+    0 4px 16px oklch(0 0 0 / 0.06),
     0 2px 8px oklch(0 0 0 / 0.03),
     inset 0 1px 1px oklch(1 0 0 / 0.6);
 }
@@ -173,7 +173,7 @@ headerbar button {
   background-color: var(--card-bg-color);
   color: var(--card-fg-color);
   box-shadow:
-    0 12px 20px oklch(0.3 0.05 50 / 0.2),
+    0 8px 16px oklch(0.3 0.05 50 / 0.2),
     0 2px 4px oklch(0.3 0.05 50 / 0.12);
 }
 
