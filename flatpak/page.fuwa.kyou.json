@@ -23,12 +23,32 @@
   ],
   "modules": [
     {
+      "name": "libgee",
+      "buildsystem": "autotools",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.gnome.org/sources/libgee/0.20/libgee-0.20.6.tar.xz",
+          "sha256": "19958742b7811986422f281e85573ca0ec210086c8f615392cf99a807dcc3420"
+        }
+      ]
+    },
+    {
+      "name": "granite-7",
+      "buildsystem": "meson",
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/elementary/granite.git",
+          "tag": "7.8.1"
+        }
+      ]
+    },
+    {
       "name": "kyou",
       "builddir": true,
       "buildsystem": "meson",
-      "config-opts": [
-        "--libdir=lib"
-      ],
+      "config-opts": ["--libdir=lib"],
       "sources": [
         {
           "type": "dir",

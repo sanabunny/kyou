@@ -22,6 +22,8 @@ compile_schemas = find_program(
 )
 appstreamcli = find_program('appstreamcli', required: false, disabler: true)
 
+granite_dep = dependency('granite-7', version: '>= 7.0.0', required: false)
+
 localedir = get_option('prefix') / get_option('localedir')
 bindir = get_option('prefix') / get_option('bindir')
 resourcedir = python.get_install_dir() / 'kyou' / 'resources'

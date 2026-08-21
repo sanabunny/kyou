@@ -1,5 +1,6 @@
 using Gtk 4.0;
 using Adw 1;
+using Granite 7.0;
 
 template $Window: Adw.ApplicationWindow {
   title: _("Kyou");
@@ -49,13 +50,13 @@ template $Window: Adw.ApplicationWindow {
                     orientation: vertical;
                     spacing: 6;
 
-                    Label greeting_label {
+                    Granite.HeaderLabel greeting_label {
                       halign: start;
                       label: _("good morning! 🌸");
+                      size: h1;
 
                       styles [
-                        "title-1",
-                        "kyou-greeting"
+                        "kyou-greeting",
                       ]
                     }
 
