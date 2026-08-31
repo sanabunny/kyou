@@ -34,9 +34,6 @@ class Application(Adw.Application):
     def do_startup(self) -> None:
         Adw.Application.do_startup(self)
 
-        if HAS_GRANITE and hasattr(Granite, "init"):
-            Granite.init()
-
         if HAS_GRANITE:
             GObject.type_ensure(Granite.HeaderLabel.__gtype__)
             GObject.type_ensure(Granite.ListItem.__gtype__)
