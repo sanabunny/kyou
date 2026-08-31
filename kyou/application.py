@@ -57,58 +57,13 @@ class Application(Adw.Application):
         if not display:
             return
 
-        if HAS_GRANITE:
-            self._granite_provider = Gtk.CssProvider()
-            self._granite_dark_provider = Gtk.CssProvider()
-            try:
-                self._granite_provider.load_from_resource(
-                    "/io/elementary/granite/Granite.css"
-                )
-                Gtk.StyleContext.add_provider_for_display(
-                    display,
-                    self._granite_provider,
-                    Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
-                )
-            except Exception:
-                pass
-
-            try:
-                self._granite_dark_provider.load_from_resource(
-                    "/io/elementary/granite/Granite-dark.css"
-                )
-            except Exception:
-                pass
-
-            style_manager = Adw.StyleManager.get_default()
-            style_manager.connect("notify::dark", self._on_dark_mode_changed)
-            self._on_dark_mode_changed(style_manager)
-
         provider = Gtk.CssProvider()
         provider.load_from_resource(f"{PREFIX}/style.css")
         Gtk.StyleContext.add_provider_for_display(
             display,
             provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + 10,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
         )
-
-    def _on_dark_mode_changed(
-        self, style_manager: Adw.StyleManager, *_: object
-    ) -> None:
-        display = Gdk.Display.get_default()
-        if not display or not hasattr(self, "_granite_dark_provider"):
-            return
-
-        if style_manager.props.dark:
-            Gtk.StyleContext.add_provider_for_display(
-                display,
-                self._granite_dark_provider,
-                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + 1,
-            )
-        else:
-            Gtk.StyleContext.remove_provider_for_display(
-                display,
-                self._granite_dark_provider,
-            )
 
     @override
     def do_activate(self) -> None:
