@@ -1,0 +1,29 @@
+id: page.fuwa.kyou
+runtime: io.elementary.Platform
+runtime-version: "9.0"
+sdk: io.elementary.Sdk
+command: kyou
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /man
+  - /share/doc
+  - /share/gtk-doc
+  - /share/man
+  - /share/pkgconfig
+  - "*.la"
+  - "*.a"
+modules:
+  - name: kyou
+    builddir: true
+    buildsystem: meson
+    config-opts:
+      - --libdir=lib
+    sources:
+      - type: dir
+        path: ../
