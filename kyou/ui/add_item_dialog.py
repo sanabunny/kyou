@@ -9,11 +9,11 @@ from kyou.config import PREFIX
 class AddItemDialog(Adw.Dialog):
     __gtype_name__ = "AddItemDialog"
 
-    item_type: Gtk.ComboRow = Gtk.Template.Child()
+    item_type: Adw.ComboRow = Gtk.Template.Child()
     title_entry: Gtk.Entry = Gtk.Template.Child()
     date_entry: Gtk.Entry = Gtk.Template.Child()
     time_entry: Gtk.Entry = Gtk.Template.Child()
-    priority: Gtk.ComboRow = Gtk.Template.Child()
+    priority: Adw.ComboRow = Gtk.Template.Child()
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
