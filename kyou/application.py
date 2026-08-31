@@ -59,7 +59,7 @@ class Application(Adw.Application):
         Gtk.StyleContext.add_provider_for_display(
             display,
             provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+            Gtk.STYLE_PROVIDER_PRIORITY_USER,
         )
 
     @override

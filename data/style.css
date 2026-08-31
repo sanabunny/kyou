@@ -1,83 +1,92 @@
-/*for reference, the window radius is 16px on macos*/
+@define-color accent_color oklch(0.48 0.08 55);
+@define-color accent_bg_color oklch(0.85 0.08 75);
+@define-color accent_fg_color oklch(0.25 0.06 50);
+
+@define-color window_bg_color oklch(0.97 0.02 75);
+@define-color window_fg_color oklch(0.32 0.06 50);
 
 :root {
+  --accent-color: oklch(0.48 0.08 55);
+  --accent-bg-color: oklch(0.85 0.08 75);
   --kyou-card-radius: 12px;
   --window-bg-color: oklch(0.97 0.02 75);
   --window-fg-color: oklch(0.32 0.06 50);
   --card-bg-color: oklch(1 0 0 / 0.95);
   --card-now-bg-color: oklch(0.9 0.05 70 / 0.95);
   --card-fg-color: oklch(0.32 0.06 50 / 0.95);
+
+  --paper-line-margin: oklch(0.6 0.2 25 / 0.35);
+  --paper-line-grid: oklch(0.5 0.06 55 / 0.08);
+
+  --header-bg-start: oklch(0.4 0.06 55);
+  --header-bg-end: oklch(0.3 0.05 50);
+  --header-fg-color: oklch(0.96 0.02 80);
+  --header-shadow-1: oklch(0.3 0.05 50 / 0.25);
+  --header-shadow-2: oklch(0.3 0.05 50 / 0.5);
+
+  --switcher-bg: oklch(0.97 0.02 75 / 0.75);
+  --switcher-border: oklch(0.5 0.06 55 / 0.15);
+  --switcher-shadow-1: oklch(0 0 0 / 0.06);
+  --switcher-shadow-2: oklch(0 0 0 / 0.03);
+  --switcher-inset: oklch(1 0 0 / 0.6);
+  --switcher-btn-color: oklch(0 0 0 / 0.5);
+  --switcher-btn-hover-bg: oklch(0 0 0 / 0.05);
+  --switcher-btn-hover-color: oklch(0 0 0 / 0.75);
+
+  --card-shadow-1: oklch(0.3 0.05 50 / 0.2);
+  --card-shadow-2: oklch(0.3 0.05 50 / 0.12);
+  --card-now-outline: oklch(0.5 0.05 70 / 0.3);
+
+  --washi-bg-1: oklch(0.9 0.06 15 / 0.88);
+  --washi-stripe-1: oklch(0.65 0.15 20 / 0.55);
+  --washi-bg-2: oklch(0.78 0.11 175 / 0.88);
+  --washi-dot-2: oklch(1 0 0 / 0.85);
+  --sticker-shadow: oklch(0.3 0.05 50 / 0.3);
 }
 
 window.dark-mode {
+  --accent-color: oklch(0.82 0.08 75);
+  --accent-bg-color: oklch(0.42 0.08 55);
   --window-bg-color: oklch(0.3 0.025 50);
   --window-fg-color: oklch(0.94 0.02 75);
   --card-bg-color: oklch(0.24 0.02 50 / 0.95);
   --card-now-bg-color: oklch(0.34 0.05 60 / 0.95);
   --card-fg-color: oklch(0.95 0.03 75 / 0.97);
-}
 
-viewswitcherbar {
-  background-color: oklch(0.97 0.02 75 / 0.75);
-  border: 1px solid oklch(0.5 0.06 55 / 0.15);
-  border-radius: 999px;
-  margin: 0 1.25rem 1.25rem 1.25rem;
-  padding: 0.25rem;
-  backdrop-filter: blur(2px) saturate(2);
-  box-shadow:
-    0 4px 16px oklch(0 0 0 / 0.06),
-    0 2px 8px oklch(0 0 0 / 0.03),
-    inset 0 1px 1px oklch(1 0 0 / 0.6);
-}
+  --paper-line-margin: oklch(0.65 0.2 25 / 0.3);
+  --paper-line-grid: oklch(1 0 0 / 0.045);
 
-actionbar > revealer > box {
-  background-color: transparent;
-  box-shadow: none;
-  padding: 0;
-}
+  --header-bg-start: oklch(0.3 0.04 52);
+  --header-bg-end: oklch(0.22 0.03 48);
+  --header-fg-color: oklch(0.96 0.02 80);
+  --header-shadow-1: oklch(0 0 0 / 0.4);
+  --header-shadow-2: oklch(1 0 0 / 0.06);
 
-viewswitcherbar button {
-  color: oklch(0 0 0 / 0.5);
-  border-radius: 999px;
-}
+  --switcher-bg: oklch(0.28 0.03 55 / 0.75);
+  --switcher-border: oklch(0.95 0.02 75 / 0.12);
+  --switcher-shadow-1: oklch(0 0 0 / 0.3);
+  --switcher-shadow-2: oklch(0 0 0 / 0.2);
+  --switcher-inset: oklch(1 0 0 / 0.08);
+  --switcher-btn-color: oklch(1 0 0 / 0.5);
+  --switcher-btn-hover-bg: oklch(1 0 0 / 0.08);
+  --switcher-btn-hover-color: oklch(1 0 0 / 0.85);
 
-viewswitcherbar button:checked {
-  color: var(--accent-color);
-}
+  --card-border: oklch(0.3 0.03 55 / 0.9);
+  --card-shadow-1: oklch(0 0 0 / 0.45);
+  --card-shadow-2: oklch(0 0 0 / 0.3);
+  --card-now-outline: oklch(0.7 0.08 70 / 0.5);
+  --card-now-glow: oklch(0.75 0.12 70 / 0.28);
+  --card-now-shadow-1: oklch(0 0 0 / 0.5);
+  --card-now-shadow-2: oklch(0 0 0 / 0.35);
 
-viewswitcher {
-  margin: 0 -16px;
-}
-
-window viewswitcherbar viewswitcher button image {
-  -gtk-icon-size: 24px;
-}
-
-window.dark-mode viewswitcherbar {
-  background-color: oklch(0.28 0.03 55 / 0.75);
-  border-color: oklch(0.95 0.02 75 / 0.12);
-  box-shadow:
-    0 8px 32px oklch(0 0 0 / 0.3),
-    0 2px 8px oklch(0 0 0 / 0.2),
-    inset 0 1px 1px oklch(1 0 0 / 0.08);
-}
-
-window.dark-mode viewswitcherbar button {
-  color: oklch(1 0 0 / 0.5);
-}
-
-window.dark-mode viewswitcherbar button:checked {
-  color: var(--accent-color);
+  --sticker-shadow: oklch(0 0 0 / 0.4);
 }
 
 .title-1,
 .title-2,
 .heading {
   font-family: "Fraunces", serif;
-}
-
-.title-1 {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .caption-heading {
@@ -85,9 +94,21 @@ window.dark-mode viewswitcherbar button:checked {
   font-weight: 700;
 }
 
+.caption-heading.accent,
+.accent {
+  color: @accent_color;
+}
+
 .kyou-greeting {
   font-size: 2.3rem;
   font-weight: 700;
+}
+
+window,
+window.background,
+window > toolbarview {
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 window {
@@ -96,16 +117,16 @@ window {
       to right,
       transparent 0px,
       transparent 6%,
-      oklch(0.6 0.2 25 / 0.35) 6%,
-      oklch(0.6 0.2 25 / 0.35) 6.1%,
+      var(--paper-line-margin) 6%,
+      var(--paper-line-margin) 6.1%,
       transparent 6.1%,
       transparent 100%
     ),
     repeating-linear-gradient(
       transparent,
       transparent 31px,
-      oklch(0.5 0.06 55 / 0.08) 31px,
-      oklch(0.5 0.06 55 / 0.08) 32px
+      var(--paper-line-grid) 31px,
+      var(--paper-line-grid) 32px
     );
   background-position: 0 15px;
 }
@@ -116,16 +137,16 @@ window.dark-mode {
       to right,
       transparent 0px,
       transparent 6%,
-      oklch(0.65 0.2 25 / 0.3) 6%,
-      oklch(0.65 0.2 25 / 0.3) 6.1%,
+      var(--paper-line-margin) 6%,
+      var(--paper-line-margin) 6.1%,
       transparent 6.1%,
       transparent 100%
     ),
     repeating-linear-gradient(
       transparent,
       transparent 31px,
-      oklch(1 0 0 / 0.045) 31px,
-      oklch(1 0 0 / 0.045) 32px
+      var(--paper-line-grid) 31px,
+      var(--paper-line-grid) 32px
     );
   background-position: 0 15px;
 }
@@ -133,29 +154,32 @@ window.dark-mode {
 headerbar {
   background-image: linear-gradient(
     180deg,
-    oklch(0.4 0.06 55) 0%,
-    oklch(0.3 0.05 50) 100%
+    var(--header-bg-start) 0%,
+    var(--header-bg-end) 100%
   );
-  color: oklch(0.96 0.02 80);
+  color: var(--header-fg-color);
+  border: none;
   box-shadow:
-    0 4px 12px oklch(0.3 0.05 50 / 0.25),
-    0 2px 6px oklch(0.3 0.05 50 / 0.5);
+    0 4px 12px var(--header-shadow-1),
+    0 2px 6px var(--header-shadow-2);
 }
 
 window.dark-mode headerbar {
   background-image: linear-gradient(
     180deg,
-    oklch(0.3 0.04 52) 0%,
-    oklch(0.22 0.03 48) 100%
+    var(--header-bg-start) 0%,
+    var(--header-bg-end) 100%
   );
   box-shadow:
-    0 4px 12px oklch(0 0 0 / 0.4),
-    0 1px 0 oklch(1 0 0 / 0.06) inset;
+    0 4px 12px var(--header-shadow-1),
+    0 1px 0 var(--header-shadow-2) inset;
 }
 
 headerbar windowtitle,
-headerbar label {
-  color: oklch(0.96 0.02 80);
+headerbar label,
+headerbar button,
+headerbar button image {
+  color: var(--header-fg-color);
 }
 
 popover contents,
@@ -163,9 +187,80 @@ popover contents label {
   color: var(--window-fg-color);
 }
 
-headerbar button image,
-headerbar button {
-  color: oklch(0.96 0.02 80);
+actionbar > revealer > box {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+  border: none;
+}
+
+viewswitcher {
+  margin: 0 -16px;
+}
+
+viewswitcherbar {
+  background-color: var(--switcher-bg);
+  border: 1px solid var(--switcher-border);
+  border-radius: 999px;
+  margin: 0 1.25rem 1.25rem 1.25rem;
+  padding: 0.25rem;
+  backdrop-filter: blur(2px) saturate(2);
+  box-shadow:
+    0 4px 16px var(--switcher-shadow-1),
+    0 2px 8px var(--switcher-shadow-2),
+    inset 0 1px 1px var(--switcher-inset);
+}
+
+viewswitcherbar button {
+  color: var(--switcher-btn-color);
+  background-color: transparent;
+  border-radius: 999px;
+  transition: all 150ms ease-in-out;
+}
+
+viewswitcherbar button:hover {
+  background-color: var(--switcher-btn-hover-bg);
+  color: var(--switcher-btn-hover-color);
+}
+
+viewswitcherbar button:checked {
+  color: @accent_color;
+  background-color: oklch(from var(--accent-color) l c h / 0.15);
+}
+
+viewswitcherbar button:checked:hover {
+  background-color: oklch(from var(--accent-color) l c h / 0.22);
+}
+
+window viewswitcherbar viewswitcher button image {
+  -gtk-icon-size: 24px;
+}
+
+window.dark-mode viewswitcherbar {
+  background-color: var(--switcher-bg);
+  border-color: var(--switcher-border);
+  box-shadow:
+    0 8px 32px var(--switcher-shadow-1),
+    0 2px 8px var(--switcher-shadow-2),
+    inset 0 1px 1px var(--switcher-inset);
+}
+
+window.dark-mode viewswitcherbar button {
+  color: var(--switcher-btn-color);
+}
+
+window.dark-mode viewswitcherbar button:hover {
+  background-color: var(--switcher-btn-hover-bg);
+  color: var(--switcher-btn-hover-color);
+}
+
+window.dark-mode viewswitcherbar button:checked {
+  color: @accent_color;
+  background-color: oklch(from var(--accent-color) l c h / 0.25);
+}
+
+window.dark-mode viewswitcherbar button:checked:hover {
+  background-color: oklch(from var(--accent-color) l c h / 0.32);
 }
 
 .card {
@@ -173,34 +268,8 @@ headerbar button {
   background-color: var(--card-bg-color);
   color: var(--card-fg-color);
   box-shadow:
-    0 8px 16px oklch(0.3 0.05 50 / 0.2),
-    0 2px 4px oklch(0.3 0.05 50 / 0.12);
-}
-
-.card-now {
-  outline: 2px dashed oklch(0.5 0.05 70 / 0.3);
-  outline-offset: -6px;
-  background-color: var(--card-now-bg-color);
-  color: var(--card-fg-color);
-}
-
-.card-now .caption-heading.accent {
-  color: var(--accent-color);
-}
-
-window.dark-mode .card {
-  border-color: oklch(0.3 0.03 55 / 0.9);
-  box-shadow:
-    0 18px 28px oklch(0 0 0 / 0.45),
-    0 4px 8px oklch(0 0 0 / 0.3);
-}
-
-window.dark-mode .card-now {
-  outline-color: oklch(0.7 0.08 70 / 0.5);
-  box-shadow:
-    0 0 32px oklch(0.75 0.12 70 / 0.28),
-    0 18px 28px oklch(0 0 0 / 0.5),
-    0 4px 8px oklch(0 0 0 / 0.35);
+    0 8px 16px var(--card-shadow-1),
+    0 2px 4px var(--card-shadow-2);
 }
 
 .card .title-1 {
@@ -219,6 +288,17 @@ window.dark-mode .card-now {
   font-size: 0.85rem;
 }
 
+.card-now {
+  outline: 2px dashed var(--card-now-outline);
+  outline-offset: -6px;
+  background-color: var(--card-now-bg-color);
+  color: var(--card-fg-color);
+}
+
+.card-now .caption-heading.accent {
+  color: @accent_color;
+}
+
 .card-now .title-1 {
   font-size: 2.4rem;
 }
@@ -235,6 +315,21 @@ window.dark-mode .card-now {
   font-size: 1.05rem;
 }
 
+window.dark-mode .card {
+  border-color: var(--card-border);
+  box-shadow:
+    0 18px 28px var(--card-shadow-1),
+    0 4px 8px var(--card-shadow-2);
+}
+
+window.dark-mode .card-now {
+  outline-color: var(--card-now-outline);
+  box-shadow:
+    0 0 32px var(--card-now-glow),
+    0 18px 28px var(--card-now-shadow-1),
+    0 4px 8px var(--card-now-shadow-2);
+}
+
 .tilt-left {
   transform: rotate(-2deg);
 }
@@ -246,44 +341,44 @@ window.dark-mode .card-now {
 .washi-tape {
   margin-top: -4px;
   transform: rotate(-6deg);
-  background-color: oklch(0.9 0.06 15 / 0.88);
+  background-color: var(--washi-bg-1);
   background-image:
     linear-gradient(oklch(1 0 0 / 0.25), transparent 55%),
     repeating-linear-gradient(
       0deg,
-      oklch(0.65 0.15 20 / 0.55) 0px,
-      oklch(0.65 0.15 20 / 0.55) 1.5px,
+      var(--washi-stripe-1) 0px,
+      var(--washi-stripe-1) 1.5px,
       transparent 1.5px,
       transparent 9px
     ),
     repeating-linear-gradient(
       90deg,
-      oklch(0.65 0.15 20 / 0.55) 0px,
-      oklch(0.65 0.15 20 / 0.55) 1.5px,
+      var(--washi-stripe-1) 0px,
+      var(--washi-stripe-1) 1.5px,
       transparent 1.5px,
       transparent 9px
     );
   border-radius: 2px;
-  box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.3);
+  box-shadow: 0 4px 6px var(--sticker-shadow);
 }
 
 .washi-tape-right {
   margin-top: -4px;
   transform: rotate(9deg);
-  background-color: oklch(0.78 0.11 175 / 0.88);
+  background-color: var(--washi-bg-2);
   background-image:
     linear-gradient(oklch(1 0 0 / 0.2), transparent 55%),
-    radial-gradient(circle, oklch(1 0 0 / 0.85) 1.6px, transparent 1.8px);
+    radial-gradient(circle, var(--washi-dot-2) 1.6px, transparent 1.8px);
   background-size:
     auto,
     9px 9px;
   border-radius: 2px;
-  box-shadow: 0 4px 6px oklch(0.3 0.05 50 / 0.3);
+  box-shadow: 0 4px 6px var(--sticker-shadow);
 }
 
 window.dark-mode .washi-tape,
 window.dark-mode .washi-tape-right {
-  box-shadow: 0 4px 6px oklch(0 0 0 / 0.4);
+  box-shadow: 0 4px 6px var(--sticker-shadow);
 }
 
 .pin-sticker {
