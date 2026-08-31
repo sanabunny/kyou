@@ -1,7 +1,7 @@
 /*for reference, the window radius is 16px on macos*/
 
 :root {
-  --kyou-card-radius: 16px;
+  --kyou-card-radius: 12px;
   --window-bg-color: oklch(0.97 0.02 75);
   --window-fg-color: oklch(0.32 0.06 50);
   --card-bg-color: oklch(1 0 0 / 0.95);
