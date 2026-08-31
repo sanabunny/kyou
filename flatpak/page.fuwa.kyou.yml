@@ -19,6 +19,13 @@ cleanup:
   - "*.la"
   - "*.a"
 modules:
+  - name: blueprint-compiler
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/blueprint-compiler.git
+        tag: v0.22.2
+
   - name: kyou
     builddir: true
     buildsystem: meson
