@@ -1,6 +1,6 @@
 id: page.fuwa.kyou
 runtime: io.elementary.Platform
-runtime-version: "9.0"
+runtime-version: "9"
 sdk: io.elementary.Sdk
 command: kyou
 finish-args:
