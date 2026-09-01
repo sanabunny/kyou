@@ -1,13 +1,7 @@
-@define-color accent_color oklch(0.48 0.08 55);
-@define-color accent_bg_color oklch(0.85 0.08 75);
-@define-color accent_fg_color oklch(0.25 0.06 50);
-
 @define-color window_bg_color oklch(0.97 0.02 75);
 @define-color window_fg_color oklch(0.32 0.06 50);
 
 :root {
-  --accent-color: oklch(0.48 0.08 55);
-  --accent-bg-color: oklch(0.85 0.08 75);
   --kyou-card-radius: 12px;
   --window-bg-color: oklch(0.97 0.02 75);
   --window-fg-color: oklch(0.32 0.06 50);
@@ -45,28 +39,26 @@
 }
 
 window.dark-mode {
-  --accent-color: oklch(0.82 0.08 75);
-  --accent-bg-color: oklch(0.42 0.08 55);
-  --window-bg-color: oklch(0.3 0.025 50);
-  --window-fg-color: oklch(0.94 0.02 75);
-  --card-bg-color: oklch(0.24 0.02 50 / 0.95);
-  --card-now-bg-color: oklch(0.34 0.05 60 / 0.95);
-  --card-fg-color: oklch(0.95 0.03 75 / 0.97);
+  --window-bg-color: oklch(0.25 0.015 50);
+  --window-fg-color: oklch(0.95 0.01 75);
+  --card-bg-color: oklch(0.32 0.02 50 / 0.95);
+  --card-now-bg-color: oklch(0.32 0.02 50 / 0.95);
+  --card-fg-color: oklch(0.95 0.01 75 / 0.97);
 
-  --paper-line-margin: oklch(0.65 0.2 25 / 0.3);
-  --paper-line-grid: oklch(1 0 0 / 0.045);
+  --paper-line-margin: oklch(0.5 0.15 25 / 0.2);
+  --paper-line-grid: oklch(1 0 0 / 0.04);
 
-  --header-bg-start: oklch(0.3 0.04 52);
-  --header-bg-end: oklch(0.22 0.03 48);
+  --header-bg-start: oklch(0.35 0.04 55);
+  --header-bg-end: oklch(0.25 0.03 50);
   --header-fg-color: oklch(0.96 0.02 80);
   --header-shadow-1: oklch(0 0 0 / 0.4);
   --header-shadow-2: oklch(1 0 0 / 0.06);
 
-  --switcher-bg: oklch(0.28 0.03 55 / 0.75);
-  --switcher-border: oklch(0.95 0.02 75 / 0.12);
+  --switcher-bg: oklch(0.25 0.015 45 / 0.75);
+  --switcher-border: oklch(0.95 0.02 75 / 0.1);
   --switcher-shadow-1: oklch(0 0 0 / 0.3);
   --switcher-shadow-2: oklch(0 0 0 / 0.2);
-  --switcher-inset: oklch(1 0 0 / 0.08);
+  --switcher-inset: oklch(1 0 0 / 0.06);
   --switcher-btn-color: oklch(1 0 0 / 0.5);
   --switcher-btn-hover-bg: oklch(1 0 0 / 0.08);
   --switcher-btn-hover-color: oklch(1 0 0 / 0.85);
@@ -74,7 +66,7 @@ window.dark-mode {
   --card-border: oklch(0.3 0.03 55 / 0.9);
   --card-shadow-1: oklch(0 0 0 / 0.45);
   --card-shadow-2: oklch(0 0 0 / 0.3);
-  --card-now-outline: oklch(0.7 0.08 70 / 0.5);
+  --card-now-outline: oklch(0.7 0.08 70 / 0.22);
   --card-now-glow: oklch(0.75 0.12 70 / 0.28);
   --card-now-shadow-1: oklch(0 0 0 / 0.5);
   --card-now-shadow-2: oklch(0 0 0 / 0.35);
@@ -83,8 +75,11 @@ window.dark-mode {
 }
 
 .title-1,
-.title-2,
-.heading {
+.title-2 {
+  font-family: "Fraunces", serif;
+}
+
+.kyou-serif {
   font-family: "Fraunces", serif;
   font-weight: 700;
 }
@@ -219,17 +214,17 @@ viewswitcherbar button {
 }
 
 viewswitcherbar button:hover {
-  background-color: oklch(from var(--accent-color) l c h / 0.07);
+  background-color: oklch(from @accent_color l c h / 0.07);
   color: var(--switcher-btn-hover-color);
 }
 
 viewswitcherbar button:checked {
   color: @accent_color;
-  background-color: oklch(from var(--accent-color) l c h / 0.15);
+  background-color: oklch(from @accent_color l c h / 0.15);
 }
 
 viewswitcherbar button:checked:hover {
-  background-color: oklch(from var(--accent-color) l c h / 0.22);
+  background-color: oklch(from @accent_color l c h / 0.22);
 }
 
 window viewswitcherbar viewswitcher button image {
@@ -256,11 +251,11 @@ window.dark-mode viewswitcherbar button:hover {
 
 window.dark-mode viewswitcherbar button:checked {
   color: @accent_color;
-  background-color: oklch(from var(--accent-color) l c h / 0.25);
+  background-color: oklch(from @accent_color l c h / 0.25);
 }
 
 window.dark-mode viewswitcherbar button:checked:hover {
-  background-color: oklch(from var(--accent-color) l c h / 0.32);
+  background-color: oklch(from @accent_color l c h / 0.32);
 }
 
 .card {
@@ -276,7 +271,7 @@ window.dark-mode viewswitcherbar button:checked:hover {
   font-size: 1.4rem;
 }
 
-.card .heading {
+.card .title-4 {
   font-size: 1.1rem;
 }
 
@@ -303,7 +298,7 @@ window.dark-mode viewswitcherbar button:checked:hover {
   font-size: 2.4rem;
 }
 
-.card-now .heading {
+.card-now .title-3 {
   font-size: 1.7rem;
 }
 
@@ -383,4 +378,10 @@ window.dark-mode .washi-tape-right {
 
 .pin-sticker {
   margin-top: -10px;
+}
+
+.boxed-list > row {
+  background-color: var(--card-bg-color);
+  color: var(--card-fg-color);
+  padding: 0.1rem 0.4rem;
 }
