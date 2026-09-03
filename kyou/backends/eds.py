@@ -193,8 +193,11 @@ class EDSBackend(Backend):
                     except AttributeError:
                         is_completed_status = False
                     
-                    completed_time = icalcomp.get_completed()
-                    is_completed_time = (completed_time is not None and not completed_time.is_null_time())
+                    try:
+                        completed_time = icalcomp.get_completed()
+                        is_completed_time = (completed_time is not None and not completed_time.is_null_time())
+                    except AttributeError:
+                        is_completed_time = False
 
                     if percent == 100 or is_completed_status or is_completed_time:
                         continue
