@@ -182,7 +182,10 @@ class EDSBackend(Backend):
                     icalcomp = comp.get_icalcomponent()
                     summary = str(icalcomp.get_summary() or "")
                     
-                    percent = icalcomp.get_percent_complete()
+                    try:
+                        percent = icalcomp.get_percentcomplete()
+                    except AttributeError:
+                        percent = 0
                     
                     status_prop = icalcomp.get_first_property(ICalGLib.PropertyKind.STATUS)
                     status_val = status_prop.get_status() if status_prop else None
@@ -194,7 +197,10 @@ class EDSBackend(Backend):
                     if percent == 100 or is_completed_status or is_completed_time:
                         continue
 
-                    due_val = icalcomp.get_due()
+                    try:
+                        due_val = icalcomp.get_due()
+                    except AttributeError:
+                        due_val = None
                     due_dt = _ical_time_to_datetime(due_val)
 
                     print(f"kyou: found incomplete task: '{summary}'")
