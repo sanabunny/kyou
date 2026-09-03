@@ -26,6 +26,10 @@ def get_backend() -> Backend:
         from kyou.backends.eventkit import EventKitBackend
 
         return EventKitBackend()
+    elif sys.platform.startswith("linux"):
+        from kyou.backends.eds import EDSBackend
+
+        return EDSBackend()
 
     msg = f"No backend implemented for platform: {sys.platform}"
     raise NotImplementedError(msg)

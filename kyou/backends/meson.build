@@ -1,11 +1,4 @@
 python.install_sources(
-    files('__init__.py'),
+    files('__init__.py', 'eventkit.py', 'eds.py'),
     subdir: 'kyou' / 'backends',
 )
-
-if host_machine.system() == 'darwin'
-    python.install_sources(
-        files('eventkit.py'),
-        subdir: 'kyou' / 'backends',
-    )
-endif

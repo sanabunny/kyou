@@ -8,6 +8,7 @@ finish-args:
   - --socket=wayland
   - --socket=fallback-x11
   - --device=dri
+  - --talk-name=org.gnome.evolution.dataserver.*
 cleanup:
   - /include
   - /lib/pkgconfig
