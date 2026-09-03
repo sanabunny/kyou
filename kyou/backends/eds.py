@@ -135,58 +135,74 @@ class EDSBackend(Backend):
         return items
 
     def get_reminders(self) -> list[Item]:
+        print("kyou: get_reminders called")
         if self._registry is None:
+            print("kyou: _registry is None")
             return []
 
         sources = self._registry.list_sources(EDataServer.SOURCE_EXTENSION_TASK_LIST)
+        print(f"kyou: found {len(sources)} task list sources")
         items: list[Item] = []
 
         for source in sources:
-            if not source.get_enabled():
+            name = source.get_display_name()
+            enabled = source.get_enabled()
+            print(f"kyou: source '{name}', enabled={enabled}")
+            if not enabled:
                 continue
 
             task_ext = None
             if source.has_extension(EDataServer.SOURCE_EXTENSION_TASK_LIST):
                 task_ext = source.get_extension(EDataServer.SOURCE_EXTENSION_TASK_LIST)
-                if not task_ext.get_selected():
-                    continue
+                selected = task_ext.get_selected()
+                print(f"kyou: source '{name}' has task_ext, selected={selected}")
 
             try:
                 client = ECal.Client.connect_sync(
                     source, ECal.ClientSourceType.TASKS, 3, None
                 )
-            except (GLib.Error, Exception):
+                print(f"kyou: connected to ECal Client for '{name}'")
+            except (GLib.Error, Exception) as e:
+                print(f"kyou: failed to connect to ECal Client for '{name}': {e}")
                 continue
 
             comps: list[object] = []
             try:
-                _, comps = client.get_object_list_as_comps_sync(
-                    "(not is-completed?)", None
-                )
-            except (GLib.Error, Exception):
-                try:
-                    _, comps = client.get_object_list_as_comps_sync("#t", None)
-                except (GLib.Error, Exception):
-                    comps = []
+                _, comps = client.get_object_list_as_comps_sync("#t", None)
+                print(f"kyou: fetched {len(comps)} components using '#t' for '{name}'")
+            except (GLib.Error, Exception) as e:
+                print(f"kyou: failed to fetch components for '{name}': {e}")
+                comps = []
 
-            list_name = source.get_display_name()
+            list_name = name
             list_color = task_ext.dup_color() if task_ext else None
 
             for comp in comps:
                 try:
                     icalcomp = comp.get_icalcomponent()
+                    summary = str(icalcomp.get_summary() or "")
+                    
                     percent = icalcomp.get_percent_complete()
-                    if percent == 100:
+                    
+                    status_prop = icalcomp.get_first_property(ICalGLib.PropertyKind.STATUS)
+                    status_val = status_prop.get_status() if status_prop else None
+                    is_completed_status = (status_val == ICalGLib.PropertyStatus.COMPLETED)
+                    
+                    completed_time = icalcomp.get_completed()
+                    is_completed_time = (completed_time is not None and not completed_time.is_null_time())
+
+                    if percent == 100 or is_completed_status or is_completed_time:
                         continue
 
                     due_val = icalcomp.get_due()
                     due_dt = _ical_time_to_datetime(due_val)
 
+                    print(f"kyou: found incomplete task: '{summary}'")
                     items.append(
                         Item(
                             id=str(icalcomp.get_uid() or ""),
                             kind=ItemKind.REMINDER,
-                            title=str(icalcomp.get_summary() or ""),
+                            title=summary,
                             start=due_dt,
                             due_date=due_dt,
                             completed=False,
@@ -197,7 +213,9 @@ class EDSBackend(Backend):
                             has_recurrence_rules=bool(comp.has_recurrences()),
                         )
                     )
-                except (AttributeError, Exception):
+                except (AttributeError, Exception) as e:
+                    print(f"kyou: failed to parse a task: {e}")
                     continue
 
         return items
+
