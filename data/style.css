@@ -123,7 +123,7 @@ window {
       var(--paper-line-grid) 31px,
       var(--paper-line-grid) 32px
     );
-  background-position: 0 15px;
+  background-position: 0 8px;
 }
 
 window.dark-mode {
