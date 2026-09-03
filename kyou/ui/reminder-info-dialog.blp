@@ -1,0 +1,43 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ReminderInfoDialog: Adw.Dialog {
+  content-width: 400;
+  content-height: 500;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: false;
+      show-end-title-buttons: false;
+
+      [start]
+      Button close_button {
+        icon-name: "window-close-symbolic";
+        clicked => $on_close_clicked();
+      }
+    }
+
+    content: ScrolledWindow {
+      hscrollbar-policy: never;
+      vscrollbar-policy: automatic;
+
+      child: Box {
+        orientation: vertical;
+        margin-start: 24;
+        margin-end: 24;
+        margin-top: 24;
+        margin-bottom: 24;
+
+        Label info_label {
+          halign: start;
+          valign: start;
+          xalign: 0;
+          yalign: 0;
+          wrap: true;
+          selectable: true;
+        }
+      };
+    };
+  };
+}

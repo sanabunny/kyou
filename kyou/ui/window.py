@@ -9,6 +9,8 @@ from kyou.ui.add_item_dialog import AddItemDialog
 from kyou.ui.gap_row import GapRow
 from kyou.ui.now_card import NowCard
 from kyou.ui.today_card import TodayCard
+from kyou.ui.reminder_list_section import ReminderListSection
+from kyou.ui.reminder_row import ReminderRow
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/window.ui")
@@ -19,6 +21,7 @@ class Window(Adw.ApplicationWindow):
 
     greeting_label: Any = Gtk.Template.Child()
     date_label: Gtk.Label = Gtk.Template.Child()
+    reminder_list_container: Gtk.Box = Gtk.Template.Child()
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
@@ -66,40 +69,46 @@ class Window(Adw.ApplicationWindow):
             return
 
         reminders = backend.get_reminders()
-        print(f"kyou: fetched {len(reminders)} reminder(s) from the system")
-        for item in reminders:
-            self._print_item(item)
+        
+        while child := self.reminder_list_container.get_first_child():
+            self.reminder_list_container.remove(child)
 
-    def _print_item(self, item: object) -> None:
-        print(f"--- {item.title!r} ---")
-        print(f"  id: {item.id}")
-        print(f"  kind: {item.kind.name}")
-        print(f"  start: {item.start}")
-        print(f"  end: {item.end}")
-        print(f"  due_date: {item.due_date}")
-        print(f"  all_day: {item.all_day}")
-        print(f"  completed: {item.completed}")
-        print(f"  completed_date: {item.completed_date}")
-        print(f"  priority: {item.priority.name}")
-        print(f"  flagged: {item.flagged}")
-        print(f"  notes: {item.notes!r}")
-        print(f"  location: {item.location!r}")
-        print(f"  url: {item.url!r}")
-        print(f"  list_name: {item.list_name!r}")
-        print(f"  list_color: {item.list_color!r}")
-        print(f"  created_date: {item.created_date}")
-        print(f"  last_modified_date: {item.last_modified_date}")
-        print(f"  has_recurrence_rules: {item.has_recurrence_rules}")
-        for rule in item.recurrence_rules:
-            print(
-                f"    recurrence: freq={rule.frequency} interval={rule.interval} "
-                f"end_date={rule.end_date} occurrence_count={rule.occurrence_count}"
-            )
-        for alarm in item.alarms:
-            print(
-                f"    alarm: trigger_date={alarm.trigger_date} "
-                f"relative_offset={alarm.relative_offset}"
-            )
+        from kyou.models import Priority
+        from gi.repository import Granite
+        
+        lists = {}
+        for item in reminders:
+            list_name = item.list_name or "Other"
+            if list_name not in lists:
+                lists[list_name] = {}
+            prio = item.priority
+            if prio not in lists[list_name]:
+                lists[list_name][prio] = []
+            lists[list_name][prio].append(item)
+            
+        order = [Priority.HIGH, Priority.MEDIUM, Priority.LOW, Priority.NONE]
+        
+        for list_name, prio_dict in lists.items():
+            list_header = Granite.HeaderLabel(label=list_name)
+            list_header.set_halign(Gtk.Align.START)
+            self.reminder_list_container.append(list_header)
+            
+            for prio in order:
+                if prio not in prio_dict:
+                    continue
+                    
+                section = ReminderListSection(priority=prio)
+                for item in prio_dict[prio]:
+                    due_time = item.due_date.strftime("%H:%M") if item.due_date else None
+                    row = ReminderRow(title=item.title, due_time=due_time, completed=item.completed)
+                    row.connect("activated", lambda _row, i=item: self.on_reminder_activated(i))
+                    section.add_row(row)
+                self.reminder_list_container.append(section)
+
+    def on_reminder_activated(self, item: Any) -> None:
+        from kyou.ui.reminder_info_dialog import ReminderInfoDialog
+        dialog = ReminderInfoDialog(item=item)
+        dialog.present(self)
 
     def _update_color_scheme(self, style_manager: Adw.StyleManager) -> None:
         if style_manager.get_dark():

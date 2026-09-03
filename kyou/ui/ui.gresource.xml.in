@@ -6,5 +6,8 @@
     <file>now-card.ui</file>
     <file>gap-row.ui</file>
     <file>add-item-dialog.ui</file>
+    <file>reminder-row.ui</file>
+    <file>reminder-list-section.ui</file>
+    <file>reminder-info-dialog.ui</file>
   </gresource>
 </gresources>

@@ -1,0 +1,19 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ReminderListSection: Box {
+  orientation: vertical;
+  spacing: 8;
+
+  Button header_button {
+    halign: start;
+    can-target: false;
+
+    styles [
+      "pill",
+    ]
+  }
+
+  Adw.PreferencesGroup preferences_group {
+  }
+}

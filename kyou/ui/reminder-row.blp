@@ -1,0 +1,11 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ReminderRow: Adw.ActionRow {
+  activatable: true;
+
+  [prefix]
+  CheckButton check_button {
+    valign: center;
+  }
+}

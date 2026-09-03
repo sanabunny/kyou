@@ -1,10 +1,10 @@
 python.install_sources(
-    files('__init__.py', 'window.py', 'today_card.py', 'now_card.py', 'gap_row.py', 'add_item_dialog.py'),
+    files('__init__.py', 'window.py', 'today_card.py', 'now_card.py', 'gap_row.py', 'add_item_dialog.py', 'reminder_row.py', 'reminder_list_section.py', 'reminder_info_dialog.py'),
     subdir: 'kyou' / 'ui',
 )
 
 blueprints = custom_target(
-    input: files('window.blp', 'today-card.blp', 'now-card.blp', 'gap-row.blp', 'add-item-dialog.blp'),
+    input: files('window.blp', 'today-card.blp', 'now-card.blp', 'gap-row.blp', 'add-item-dialog.blp', 'reminder-row.blp', 'reminder-list-section.blp', 'reminder-info-dialog.blp'),
     output: '.',
     command: [
         blueprint_compiler,
