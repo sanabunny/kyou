@@ -204,8 +204,7 @@ class EDSBackend(Backend):
                     except AttributeError:
                         is_completed_time = False
 
-                    if percent == 100 or is_completed_status or is_completed_time:
-                        continue
+                    is_completed = bool(percent == 100 or is_completed_status or is_completed_time)
 
                     try:
                         due_val = icalcomp.get_due()
@@ -226,7 +225,7 @@ class EDSBackend(Backend):
                             title=summary,
                             start=due_dt,
                             due_date=due_dt,
-                            completed=False,
+                            completed=is_completed,
                             priority=_priority_from_eds(priority_val),
                             notes=str(icalcomp.get_description() or "") or None,
                             list_name=list_name,
