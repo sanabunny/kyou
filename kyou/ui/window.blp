@@ -72,51 +72,9 @@ template $Window: Adw.ApplicationWindow {
                     }
                   }
 
-                  Box {
+                  Box today_list_container {
                     orientation: vertical;
                     spacing: 4;
-
-                    $NowCard {
-                      icon-text: "⏰";
-                      time-text: "14:15 · NOW";
-                      title-text: _("water the plants 🪴");
-                      subtitle-text: _("1h 15m");
-                      tilt-class: "tilt-left";
-                      sticker-type: "washi-tape";
-                    }
-
-                    $GapRow {
-                      emoji-text: "☕";
-                      text-text: _("15m break");
-                    }
-
-                    $TodayCard {
-                      icon-text: "📝";
-                      time-text: "15:30";
-                      title-text: _("reply to emails 📩");
-                      subtitle-text: _("15m");
-                      tilt-class: "tilt-right";
-                      sticker-type: "washi-tape-right";
-                    }
-
-                    $GapRow {
-                      emoji-text: "🌤️";
-                      text-text: _("3h free time");
-                    }
-
-                    $TodayCard {
-                      icon-text: "🌙";
-                      time-text: "18:30";
-                      title-text: _("read a chapter 📚");
-                      subtitle-text: _("1h");
-                      tilt-class: "tilt-left";
-                      sticker-type: "pin";
-                    }
-
-                    $GapRow {
-                      emoji-text: "🌙";
-                      text-text: _("20m → time left of day");
-                    }
                   }
                 };
               };
