@@ -113,6 +113,11 @@ class EDSBackend(Backend):
                     if dtstart_val and hasattr(dtstart_val, "is_date"):
                         all_day = dtstart_val.is_date()
 
+                    try:
+                        priority_val = icalcomp.get_priority()
+                    except AttributeError:
+                        priority_val = 0
+
                     items.append(
                         Item(
                             id=str(icalcomp.get_uid() or ""),
@@ -125,7 +130,7 @@ class EDSBackend(Backend):
                             location=str(icalcomp.get_location() or "") or None,
                             list_name=list_name,
                             list_color=list_color,
-                            priority=_priority_from_eds(icalcomp.get_priority()),
+                            priority=_priority_from_eds(priority_val),
                             has_recurrence_rules=bool(comp.has_recurrences()),
                         )
                     )
@@ -208,6 +213,11 @@ class EDSBackend(Backend):
                         due_val = None
                     due_dt = _ical_time_to_datetime(due_val)
 
+                    try:
+                        priority_val = icalcomp.get_priority()
+                    except AttributeError:
+                        priority_val = 0
+
                     print(f"kyou: found incomplete task: '{summary}'")
                     items.append(
                         Item(
@@ -217,7 +227,7 @@ class EDSBackend(Backend):
                             start=due_dt,
                             due_date=due_dt,
                             completed=False,
-                            priority=_priority_from_eds(icalcomp.get_priority()),
+                            priority=_priority_from_eds(priority_val),
                             notes=str(icalcomp.get_description() or "") or None,
                             list_name=list_name,
                             list_color=list_color,
