@@ -187,9 +187,11 @@ class EDSBackend(Backend):
                     except AttributeError:
                         percent = 0
                     
-                    status_prop = icalcomp.get_first_property(ICalGLib.PropertyKind.STATUS)
-                    status_val = status_prop.get_status() if status_prop else None
-                    is_completed_status = (status_val == ICalGLib.PropertyStatus.COMPLETED)
+                    try:
+                        status_val = icalcomp.get_status()
+                        is_completed_status = (str(status_val).endswith("COMPLETED"))
+                    except AttributeError:
+                        is_completed_status = False
                     
                     completed_time = icalcomp.get_completed()
                     is_completed_time = (completed_time is not None and not completed_time.is_null_time())
