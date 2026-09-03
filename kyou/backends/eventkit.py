@@ -104,11 +104,11 @@ class EventKitBackend(Backend):
         self._store = EKEventStore.alloc().init()
 
     def request_access(self) -> bool:
-        events_granted = self._request_access_for(EKEntityTypeEvent)
-        reminders_granted = self._request_access_for(EKEntityTypeReminder)
+        events_granted = self._request_full_access(EKEntityTypeEvent, "requestFullAccessToEventsWithCompletion_")
+        reminders_granted = self._request_full_access(EKEntityTypeReminder, "requestFullAccessToRemindersWithCompletion_")
         return events_granted and reminders_granted
 
-    def _request_access_for(self, entity_type: int) -> bool:
+    def _request_full_access(self, entity_type: int, modern_selector: str) -> bool:
         result: dict[str, bool] = {}
         done = threading.Event()
 
@@ -116,7 +116,12 @@ class EventKitBackend(Backend):
             result["granted"] = granted
             done.set()
 
-        self._store.requestAccessToEntityType_completion_(entity_type, completion)
+        if hasattr(self._store, modern_selector):
+            method = getattr(self._store, modern_selector)
+            method(completion)
+        else:
+            self._store.requestAccessToEntityType_completion_(entity_type, completion)
+            
         done.wait(timeout=30)
         return result.get("granted", False)
 
@@ -130,6 +135,10 @@ class EventKitBackend(Backend):
         ek_events = self._store.eventsMatchingPredicate_(predicate)
 
         items: list[Item] = []
+        
+        if ek_events is None:
+            return items
+        
         for ek_event in ek_events:
             items.append(
                 Item(
