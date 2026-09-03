@@ -13,8 +13,8 @@ try:
     from gi.repository import ECal, EDataServer, ICalGLib
 except (ValueError, ImportError) as exc:
     msg = (
-        "Evolution Data Server (ECal 2.0 / EDataServer 1.2 / ICalGLib 3.0) "
-        "is required on Linux."
+        f"Evolution Data Server (ECal 2.0 / EDataServer 1.2 / ICalGLib 3.0) "
+        f"is required on Linux: {exc}"
     )
     raise ImportError(msg) from exc
 
