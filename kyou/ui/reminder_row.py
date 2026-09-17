@@ -19,6 +19,15 @@ class ReminderRow(Adw.ActionRow):
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
+        self.add_css_class("reminder-row")
+        self.set_cursor_from_name("pointer")
+        self.check_button.set_cursor_from_name("pointer")
+
+        motion = Gtk.EventControllerMotion()
+        motion.connect("enter", lambda *_a: self.add_css_class("row-hover"))
+        motion.connect("leave", lambda *_a: self.remove_css_class("row-hover"))
+        self.add_controller(motion)
+
         self.set_title(title)
 
         if due_time:

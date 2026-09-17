@@ -7,65 +7,71 @@ template $TodayCard: Overlay {
   margin-end: 16;
 
   child: Box card_box {
-    orientation: vertical;
-    spacing: 2;
+    orientation: horizontal;
+    spacing: 0;
 
     styles [
       "card",
     ]
 
-    Label time_label {
-      halign: start;
-      margin-top: 10;
-      margin-start: 14;
-      margin-end: 14;
+    Box inner_box {
+      orientation: vertical;
+      spacing: 2;
+      hexpand: true;
 
-      styles [
-        "caption-heading",
-        "dim-label",
-      ]
-    }
-
-    Box content_row {
-      orientation: horizontal;
-      spacing: 10;
-      valign: center;
-      margin-start: 14;
-      margin-end: 14;
-      margin-bottom: 10;
-
-      Label icon_label {
-        valign: center;
+      Label time_label {
+        halign: start;
+        margin-top: 10;
+        margin-start: 14;
+        margin-end: 14;
 
         styles [
-          "title-1",
+          "caption-heading",
+          "dim-label",
         ]
       }
 
-      Box text_box {
-        orientation: vertical;
-        spacing: 2;
-        hexpand: true;
+      Box content_row {
+        orientation: horizontal;
+        spacing: 10;
+        valign: center;
+        margin-start: 14;
+        margin-end: 14;
+        margin-bottom: 10;
 
-        Label title_label {
-          halign: start;
-          xalign: 0;
-          wrap: true;
+        Label icon_label {
+          valign: center;
 
           styles [
-            "title-4",
-            "kyou-serif",
+            "title-1",
           ]
         }
 
-        Label subtitle_label {
-          halign: start;
-          xalign: 0;
+        Box text_box {
+          orientation: vertical;
+          spacing: 2;
+          hexpand: true;
 
-          styles [
-            "caption",
-            "dim-label",
-          ]
+          Label title_label {
+            halign: start;
+            xalign: 0;
+            wrap: true;
+
+            styles [
+              "title-4",
+              "kyou-serif",
+            ]
+          }
+
+          Label subtitle_label {
+            halign: start;
+            xalign: 0;
+
+            styles [
+              "caption",
+              "dim-label",
+            ]
+          }
         }
       }
     }

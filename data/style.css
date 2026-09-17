@@ -265,6 +265,16 @@ window.dark-mode viewswitcherbar button:checked:hover {
   box-shadow:
     0 8px 16px var(--card-shadow-1),
     0 2px 4px var(--card-shadow-2);
+  transition: transform 180ms cubic-bezier(0.2, 0, 0, 1), box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.card:hover,
+.card.card-hover {
+  transform: translateY(-3px) scale(1.01);
+  background-color: oklch(1 0 0);
+  box-shadow:
+    0 16px 32px var(--card-shadow-1),
+    0 6px 12px var(--card-shadow-2);
 }
 
 .card .title-1 {
@@ -288,6 +298,15 @@ window.dark-mode viewswitcherbar button:checked:hover {
   outline-offset: -6px;
   background-color: var(--card-now-bg-color);
   color: var(--card-fg-color);
+  transition: transform 180ms cubic-bezier(0.2, 0, 0, 1), box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.card-now:hover,
+.card-now.card-hover {
+  background-color: oklch(0.93 0.05 70 / 0.98);
+  box-shadow:
+    0 0 28px var(--card-now-glow, oklch(0.75 0.12 70 / 0.35)),
+    0 16px 32px var(--card-shadow-1);
 }
 
 .card-now .caption-heading.accent {
@@ -317,6 +336,14 @@ window.dark-mode .card {
     0 4px 8px var(--card-shadow-2);
 }
 
+window.dark-mode .card:hover,
+window.dark-mode .card.card-hover {
+  background-color: oklch(0.36 0.02 50 / 0.98);
+  box-shadow:
+    0 22px 36px var(--card-shadow-1),
+    0 6px 12px var(--card-shadow-2);
+}
+
 window.dark-mode .card-now {
   outline-color: var(--card-now-outline);
   box-shadow:
@@ -325,12 +352,42 @@ window.dark-mode .card-now {
     0 4px 8px var(--card-now-shadow-2);
 }
 
+window.dark-mode .card-now:hover,
+window.dark-mode .card-now.card-hover {
+  background-color: oklch(0.36 0.02 50 / 0.98);
+  box-shadow:
+    0 0 40px var(--card-now-glow),
+    0 22px 36px var(--card-now-shadow-1),
+    0 6px 12px var(--card-now-shadow-2);
+}
+
 .tilt-left {
   transform: rotate(-2deg);
 }
 
+.tilt-left:hover,
+.tilt-left.card-hover {
+  transform: translateY(-3px) rotate(-2deg) scale(1.01);
+}
+
 .tilt-right {
   transform: rotate(1.5deg);
+}
+
+.tilt-right:hover,
+.tilt-right.card-hover {
+  transform: translateY(-3px) rotate(1.5deg) scale(1.01);
+}
+
+.gap-now {
+  background-color: oklch(from @accent_color l c h / 0.12);
+  border-radius: 999px;
+  padding: 3px 12px;
+}
+
+.gap-now .caption {
+  font-weight: 700;
+  color: @accent_color;
 }
 
 .washi-tape {
@@ -384,4 +441,40 @@ window.dark-mode .washi-tape-right {
   background-color: var(--card-bg-color);
   color: var(--card-fg-color);
   padding: 0.1rem 0.4rem;
+  transition: background-color 140ms ease;
 }
+
+.reminder-row {
+  transition: background-color 140ms ease;
+}
+
+.reminder-row:hover,
+.reminder-row.row-hover {
+  background-color: oklch(from @accent_color l c h / 0.08);
+}
+
+.reminder-row .row-chevron {
+  transition: transform 140ms ease, color 140ms ease;
+}
+
+.reminder-row:hover .row-chevron,
+.reminder-row.row-hover .row-chevron {
+  color: @accent_color;
+  transform: translateX(2px);
+}
+
+window.dark-mode .reminder-row:hover,
+window.dark-mode .reminder-row.row-hover {
+  background-color: oklch(from @accent_color l c h / 0.16);
+}
+
+
+.card-done {
+  opacity: 0.5;
+}
+
+.card-done .kyou-serif {
+  text-decoration: line-through;
+  text-decoration-color: currentColor;
+}
+

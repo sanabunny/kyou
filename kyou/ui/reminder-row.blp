@@ -8,4 +8,15 @@ template $ReminderRow: Adw.ActionRow {
   CheckButton check_button {
     valign: center;
   }
+
+  [suffix]
+  Image {
+    icon-name: "go-next-symbolic";
+    valign: center;
+
+    styles [
+      "dim-label",
+      "row-chevron",
+    ]
+  }
 }

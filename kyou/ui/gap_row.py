@@ -14,6 +14,7 @@ class GapRow(Gtk.Box):
 
     emoji_text = GObject.Property(type=str, default="")
     text_text = GObject.Property(type=str, default="")
+    is_now = GObject.Property(type=bool, default=False)
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
@@ -23,3 +24,7 @@ class GapRow(Gtk.Box):
     def _apply(self) -> None:
         self.emoji_label.set_label(self.emoji_text)
         self.text_label.set_label(self.text_text)
+        if self.is_now:
+            self.add_css_class("gap-now")
+        else:
+            self.remove_css_class("gap-now")
