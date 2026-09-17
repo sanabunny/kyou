@@ -1,10 +1,11 @@
 [Desktop Entry]
 Name=Kyou
+Comment=View and manage your tasks and calendar for today
 Exec=kyou
 Icon=@APP_ID@
 Terminal=false
 Type=Application
-Categories=Utility;
-Keywords=GTK;
+Categories=Office;Calendar;GTK;
+Keywords=calendar;todo;tasks;reminders;today;agenda;schedule;GTK;
 StartupNotify=true
 DBusActivatable=true

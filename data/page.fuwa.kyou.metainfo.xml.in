@@ -5,9 +5,21 @@
   <project_license>GPL-3.0-or-later</project_license>
 
   <name>Kyou</name>
-  <summary>Keep the summary shorter, between 10 and 35 characters</summary>
+  <summary>Today's agenda and tasks</summary>
   <description>
-    <p>No description</p>
+    <p>
+      Kyou is a focused task and calendar manager designed to answer one simple question: what am I meant to be doing right now?
+    </p>
+    <p>
+      Instead of overwhelming you with endless lists and complicated calendar views, Kyou gathers your schedule and reminders into a single, clean, and intuitive overview.
+    </p>
+    <p>Features include:</p>
+    <ul>
+      <li>Direct integration with system calendar and reminders via Evolution Data Server</li>
+      <li>At-a-glance cards showing your current and upcoming agenda for today</li>
+      <li>Simple distraction-free interface built with GTK 4 and Libadwaita</li>
+      <li>Full support for dark mode and system accent colors</li>
+    </ul>
   </description>
 
   <developer id="page.fuwa">
@@ -17,7 +29,7 @@
   <url type="homepage">https://fuwa.page/</url>
   <url type="vcs-browser">https://github.com/fuwaflow/kyou</url>
   <url type="bugtracker">https://github.com/fuwaflow/kyou/issues</url>
-  <url type="contact">mailto:fuwaflow@fuwa.page</url>
+  <url type="contact">https://github.com/fuwaflow/kyou/issues</url>
 
   <translation type="gettext">kyou</translation>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
@@ -33,12 +45,23 @@
   </supports>
 
   <branding>
-    <color type="primary" scheme_preference="light">#ff00ff</color>
-    <color type="primary" scheme_preference="dark">#993d3d</color>
+    <color type="primary" scheme_preference="light">#613f27</color>
+    <color type="primary" scheme_preference="dark">#4b3526</color>
   </branding>
 
+  <screenshots>
+    <screenshot type="default">
+      <caption>Today's schedule and reminders view in Kyou</caption>
+      <image>https://raw.githubusercontent.com/fuwaflow/kyou/main/data/screenshots/window.png</image>
+    </screenshot>
+  </screenshots>
+
   <releases>
-    <release version="49.0"/>
+    <release version="0.1.0" date="2026-09-17">
+      <description>
+        <p>Initial release with calendar and reminders support, today view, and adaptive UI.</p>
+      </description>
+    </release>
   </releases>
 
 </component>
