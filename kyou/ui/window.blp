@@ -18,7 +18,7 @@ template $Window: Adw.ApplicationWindow {
           child: Adw.ToolbarView {
             [top]
             Adw.HeaderBar {
-              height-request: 42;
+              height-request: 52;
 
               [end]
               MenuButton {
@@ -29,6 +29,14 @@ template $Window: Adw.ApplicationWindow {
                 menu-model: menu {
                   item (_("About Kyou"), "app.about")
                 };
+              }
+
+              [end]
+              Button {
+                tooltip-text: _("Create Item (coming soon)");
+                icon-name: "list-add-symbolic";
+                sensitive: false;
+                visible: false;
               }
             }
 
@@ -76,6 +84,14 @@ template $Window: Adw.ApplicationWindow {
                     orientation: vertical;
                     spacing: 4;
                   }
+
+                  Adw.StatusPage no_events_page {
+                    visible: false;
+                    icon-name: "x-office-calendar-symbolic";
+                    title: _("Nothing Scheduled");
+                    description: _("You have nothing on today 🌸");
+                    vexpand: true;
+                  }
                 };
               };
             };
@@ -90,7 +106,7 @@ template $Window: Adw.ApplicationWindow {
           child: Adw.ToolbarView {
             [top]
             Adw.HeaderBar {
-              height-request: 42;
+              height-request: 52;
 
               [end]
               MenuButton {
@@ -105,8 +121,10 @@ template $Window: Adw.ApplicationWindow {
 
               [end]
               Button add_item_button {
-                tooltip-text: _("Create Item");
+                tooltip-text: _("Create Item (coming soon)");
                 icon-name: "list-add-symbolic";
+                sensitive: false;
+                visible: false;
                 clicked => $on_add_item_clicked();
               }
             }
@@ -119,13 +137,25 @@ template $Window: Adw.ApplicationWindow {
                 maximum-size: 800;
                 tightening-threshold: 600;
 
-                child: Box reminder_list_container {
+                child: Box {
                   orientation: vertical;
-                  spacing: 24;
-                  margin-top: 24;
-                  margin-bottom: 80;
-                  margin-start: 28;
-                  margin-end: 28;
+
+                  Box reminder_list_container {
+                    orientation: vertical;
+                    spacing: 24;
+                    margin-top: 24;
+                    margin-bottom: 80;
+                    margin-start: 28;
+                    margin-end: 28;
+                  }
+
+                  Adw.StatusPage no_reminders_page {
+                    visible: false;
+                    icon-name: "edit-paste-symbolic";
+                    title: _("No Reminders");
+                    description: _("You have no reminders set up yet.");
+                    vexpand: true;
+                  }
                 };
               };
             };

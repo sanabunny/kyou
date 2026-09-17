@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from gettext import gettext as _
 from typing import Any
 
@@ -13,6 +13,28 @@ from kyou.ui.reminder_list_section import ReminderListSection
 from kyou.ui.reminder_row import ReminderRow
 
 
+def _format_due_date(due: datetime | None, all_day: bool = False) -> str | None:
+    if not due:
+        return None
+    today = datetime.now().date()
+    due_date = due.date()
+    has_time = not all_day and not (due.hour == 0 and due.minute == 0)
+    time_str = due.strftime("%H:%M") if has_time else ""
+
+    if due_date == today:
+        return f"Today · {time_str}" if has_time else "Today"
+    elif due_date == today + timedelta(days=1):
+        return f"Tomorrow · {time_str}" if has_time else "Tomorrow"
+    elif due_date == today - timedelta(days=1):
+        return f"Yesterday · {time_str}" if has_time else "Yesterday"
+    elif due_date.year == today.year:
+        date_str = f"{due.day} {due.strftime('%b')}"
+        return f"{date_str} · {time_str}" if has_time else date_str
+    else:
+        date_str = f"{due.day} {due.strftime('%b %Y')}"
+        return f"{date_str} · {time_str}" if has_time else date_str
+
+
 @Gtk.Template(resource_path=f"{PREFIX}/window.ui")
 class Window(Adw.ApplicationWindow):
     """The main window."""
@@ -23,6 +45,9 @@ class Window(Adw.ApplicationWindow):
     date_label: Gtk.Label = Gtk.Template.Child()
     reminder_list_container: Gtk.Box = Gtk.Template.Child()
     today_list_container: Gtk.Box = Gtk.Template.Child()
+    no_reminders_page: Adw.StatusPage = Gtk.Template.Child()
+    no_events_page: Adw.StatusPage = Gtk.Template.Child()
+    view_stack: Adw.ViewStack = Gtk.Template.Child()
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
@@ -81,6 +106,16 @@ class Window(Adw.ApplicationWindow):
             
         self._populate_today_tab(today_events, reminders)
 
+        has_reminders = len(reminders) > 0
+        self.no_reminders_page.set_visible(not has_reminders)
+
+        today_date = datetime.today().date()
+        has_today_items = bool(today_events) or any(
+            r.due_date and r.due_date.date() == today_date and not r.completed
+            for r in reminders
+        )
+        self.no_events_page.set_visible(not has_today_items)
+
         from kyou.models import Priority
         from gi.repository import Granite
         
@@ -97,7 +132,7 @@ class Window(Adw.ApplicationWindow):
         order = [Priority.HIGH, Priority.MEDIUM, Priority.LOW, Priority.NONE]
         
         for list_name, prio_dict in lists.items():
-            list_header = Granite.HeaderLabel(label=list_name)
+            list_header = Granite.HeaderLabel(label=list_name, size=Granite.HeaderLabelSize.H2)
             list_header.set_halign(Gtk.Align.START)
             self.reminder_list_container.append(list_header)
             
@@ -107,9 +142,9 @@ class Window(Adw.ApplicationWindow):
                     
                 section = ReminderListSection(priority=prio)
                 for item in prio_dict[prio]:
-                    due_time = item.due_date.strftime("%H:%M") if item.due_date else None
+                    due_time = _format_due_date(item.due_date, item.all_day)
                     row = ReminderRow(title=item.title, due_time=due_time, completed=item.completed)
-                    row.connect("activated", lambda _row, i=item: self.on_reminder_activated(i))
+                    row.connect("activated", lambda _row, i=item: self.on_item_activated(i))
                     section.add_row(row)
                 self.reminder_list_container.append(section)
 
@@ -141,21 +176,24 @@ class Window(Adw.ApplicationWindow):
                         gap_str = f"{gap_hours}h"
                     else:
                         gap_str = f"{gap_mins}m"
-                    gap_row = GapRow(emoji_text="☕", text_text=f"{gap_str} free time")
+                    is_gap_now = last_end_time <= now < event.start
+                    gap_text = f"{gap_str} free time" + (" · NOW" if is_gap_now else "")
+                    gap_row = GapRow(emoji_text="☕", text_text=gap_text, is_now=is_gap_now)
                     self.today_list_container.append(gap_row)
                     
             is_active = False
             if event.start and event.end:
                 is_active = event.start <= now <= event.end
-            
-            time_text = ""
+
             if event.all_day:
                 time_text = _("All Day")
             elif event.start:
                 time_text = event.start.strftime("%H:%M")
+                if event.end and not event.all_day:
+                    time_text += " – " + event.end.strftime("%H:%M")
                 if is_active:
-                    time_text += " · NOW"
-            
+                    time_text += "  · NOW"
+
             subtitle_text = ""
             if event.start and event.end and not event.all_day:
                 dur_delta = event.end - event.start
@@ -173,6 +211,13 @@ class Window(Adw.ApplicationWindow):
                 emoji_text = "✅"
             else:
                 emoji_text = "📅" if not event.all_day else "🏖️"
+
+            cal_color = event.list_color or ""
+
+            if event.kind.name == "REMINDER":
+                is_done = event.completed
+            else:
+                is_done = bool(event.end and event.end < now)
             
             if is_active:
                 card = NowCard(
@@ -181,7 +226,9 @@ class Window(Adw.ApplicationWindow):
                     title_text=event.title,
                     subtitle_text=subtitle_text,
                     tilt_class=next(tilt_iter),
-                    sticker_type=next(sticker_iter)
+                    sticker_type=next(sticker_iter),
+                    calendar_color=cal_color,
+                    done=is_done,
                 )
             else:
                 card = TodayCard(
@@ -190,9 +237,12 @@ class Window(Adw.ApplicationWindow):
                     title_text=event.title,
                     subtitle_text=subtitle_text,
                     tilt_class=next(tilt_iter),
-                    sticker_type=next(sticker_iter)
+                    sticker_type=next(sticker_iter),
+                    calendar_color=cal_color,
+                    done=is_done,
                 )
             
+            card.connect("activated", lambda _card, ev=event: self.on_item_activated(ev))
             self.today_list_container.append(card)
             
             if not event.all_day:
@@ -213,10 +263,12 @@ class Window(Adw.ApplicationWindow):
                     gap_str = f"{gap_hours}h"
                 else:
                     gap_str = f"{gap_mins}m"
-                gap_row = GapRow(emoji_text="🌙", text_text=f"{gap_str} → time left of day")
+                is_gap_now = last_end_time <= now < end_of_day
+                gap_text = f"{gap_str} → time left of day" + (" · NOW" if is_gap_now else "")
+                gap_row = GapRow(emoji_text="🌙", text_text=gap_text, is_now=is_gap_now)
                 self.today_list_container.append(gap_row)
 
-    def on_reminder_activated(self, item: Any) -> None:
+    def on_item_activated(self, item: Any) -> None:
         from kyou.ui.reminder_info_dialog import ReminderInfoDialog
         dialog = ReminderInfoDialog(item=item)
         dialog.present(self)
