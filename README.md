@@ -6,7 +6,7 @@
 
 Kyou (今日 — "today" in Japanese) is a small app I made to help me manage my tasks for the day.
 
-_(this app is currently not really functional)_
+_(currently it operates read-only, but i'll add read/write support soon!)_
 
 Other apps overwhelmed and confused me with their endless lists and complicated calendar views, so Kyou tries to answer one question when you open it: **what am I meant to be doing right now?**, and puts all the information on one easy-to-understand page.
 
