@@ -2,8 +2,8 @@ using Gtk 4.0;
 using Adw 1;
 
 template $ReminderInfoDialog: Adw.Dialog {
-  content-width: 400;
-  content-height: 500;
+  content-width: 420;
+  content-height: 560;
 
   child: Adw.ToolbarView {
     [top]
@@ -13,6 +13,7 @@ template $ReminderInfoDialog: Adw.Dialog {
 
       [start]
       Button close_button {
+        tooltip-text: _("Close");
         icon-name: "window-close-symbolic";
         clicked => $on_close_clicked();
       }
@@ -22,21 +23,23 @@ template $ReminderInfoDialog: Adw.Dialog {
       hscrollbar-policy: never;
       vscrollbar-policy: automatic;
 
-      child: Box {
-        orientation: vertical;
-        margin-start: 24;
-        margin-end: 24;
-        margin-top: 24;
-        margin-bottom: 24;
+      child: Adw.Clamp {
+        maximum-size: 600;
+        tightening-threshold: 400;
 
-        Label info_label {
-          halign: start;
-          valign: start;
-          xalign: 0;
-          yalign: 0;
-          wrap: true;
-          selectable: true;
-        }
+        child: Box {
+          orientation: vertical;
+          spacing: 24;
+          margin-start: 18;
+          margin-end: 18;
+          margin-top: 18;
+          margin-bottom: 24;
+
+          Box rows_box {
+            orientation: vertical;
+            spacing: 18;
+          }
+        };
       };
     };
   };

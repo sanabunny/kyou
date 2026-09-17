@@ -1,47 +1,133 @@
 from typing import Any
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gdk, Gtk
 
 from kyou.config import PREFIX
-from kyou.models import Item
+from kyou.models import Item, ItemKind, Priority
+
+
+_PRIORITY_LABEL = {
+    Priority.HIGH: "⚡ High",
+    Priority.MEDIUM: "● Medium",
+    Priority.LOW: "▾ Low",
+    Priority.NONE: "—",
+}
+
+
+def _fmt_dt(dt: Any) -> str:
+    if dt is None:
+        return "—"
+    return dt.strftime("%a, %-d %b %Y  %H:%M")
+
+
+def _fmt_offset(td: Any) -> str:
+    if td is None:
+        return "—"
+    total = int(td.total_seconds())
+    hours, rem = divmod(abs(total), 3600)
+    mins = rem // 60
+    if hours and mins:
+        return f"{hours}h {mins}m before"
+    if hours:
+        return f"{hours}h before"
+    return f"{mins}m before"
+
+
+def _make_group(title: str, rows: list[tuple[str, str]]) -> Adw.PreferencesGroup:
+    group = Adw.PreferencesGroup(title=title)
+    for label, value in rows:
+        row = Adw.ActionRow(title=label, subtitle=value or "—")
+        if label == "URL" and value and (value.startswith("http://") or value.startswith("https://")):
+            row.set_activatable(True)
+            row.set_cursor_from_name("pointer")
+            row.connect("activated", lambda _r, u=value: Gtk.show_uri(None, u, Gdk.CURRENT_TIME))
+        else:
+            row.set_activatable(False)
+            row.set_selectable(False)
+        group.add(row)
+    return group
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/reminder-info-dialog.ui")
 class ReminderInfoDialog(Adw.Dialog):
     __gtype_name__ = "ReminderInfoDialog"
-    
-    info_label: Gtk.Label = Gtk.Template.Child()
+
+    rows_box: Gtk.Box = Gtk.Template.Child()
 
     def __init__(self, item: Item, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self.set_title(item.title)
-        
-        info_text = f"--- {item.title!r} ---\n"
-        info_text += f"id: {item.id}\n"
-        info_text += f"kind: {item.kind.name}\n"
-        info_text += f"start: {item.start}\n"
-        info_text += f"end: {item.end}\n"
-        info_text += f"due_date: {item.due_date}\n"
-        info_text += f"all_day: {item.all_day}\n"
-        info_text += f"completed: {item.completed}\n"
-        info_text += f"completed_date: {item.completed_date}\n"
-        info_text += f"priority: {item.priority.name}\n"
-        info_text += f"flagged: {item.flagged}\n"
-        info_text += f"notes: {item.notes!r}\n"
-        info_text += f"location: {item.location!r}\n"
-        info_text += f"url: {item.url!r}\n"
-        info_text += f"list_name: {item.list_name!r}\n"
-        info_text += f"list_color: {item.list_color!r}\n"
-        info_text += f"created_date: {item.created_date}\n"
-        info_text += f"last_modified_date: {item.last_modified_date}\n"
-        info_text += f"has_recurrence_rules: {item.has_recurrence_rules}\n"
-        
-        for rule in item.recurrence_rules:
-            info_text += f"  recurrence: freq={rule.frequency} interval={rule.interval} end_date={rule.end_date} occurrence_count={rule.occurrence_count}\n"
-        for alarm in item.alarms:
-            info_text += f"  alarm: trigger_date={alarm.trigger_date} relative_offset={alarm.relative_offset}\n"
-            
-        self.info_label.set_label(info_text)
+
+        if item.kind == ItemKind.EVENT:
+            details: list[tuple[str, str]] = [
+                ("Calendar", item.list_name or "—"),
+                ("Start", _fmt_dt(item.start)),
+                ("End", _fmt_dt(item.end)),
+            ]
+            if item.location:
+                details.append(("Location", item.location))
+        else:
+            details: list[tuple[str, str]] = [
+                ("List", item.list_name or "—"),
+                ("Priority", _PRIORITY_LABEL.get(item.priority, "—")),
+                ("Due", _fmt_dt(item.due_date)),
+                ("Status", "✓ Completed" if item.completed else "Pending"),
+            ]
+            if item.completed_date:
+                details.append(("Completed on", _fmt_dt(item.completed_date)))
+            if item.flagged:
+                details.append(("Flagged", "Yes ⚑"))
+            if item.location:
+                details.append(("Location", item.location))
+
+        self.rows_box.append(_make_group("Details", details))
+
+        if item.notes:
+            notes_group = Adw.PreferencesGroup(title="Notes")
+            label = Gtk.Label(
+                label=item.notes,
+                wrap=True,
+                xalign=0,
+                selectable=False,
+                margin_top=8,
+                margin_bottom=8,
+                margin_start=12,
+                margin_end=12,
+            )
+            label.add_css_class("dim-label")
+            notes_group.add(label)
+            self.rows_box.append(notes_group)
+
+        if item.alarms:
+            alarm_rows = [
+                (
+                    f"Alarm {i + 1}",
+                    _fmt_dt(a.trigger_date) if a.trigger_date else _fmt_offset(a.relative_offset),
+                )
+                for i, a in enumerate(item.alarms)
+            ]
+            self.rows_box.append(_make_group("Reminders", alarm_rows))
+
+        if item.recurrence_rules:
+            rec_rows = [
+                (
+                    f"Repeat {i + 1}",
+                    f"{(r.frequency or 'unknown').capitalize()}"
+                    + (f", every {r.interval}" if r.interval and r.interval > 1 else "")
+                    + (f", until {_fmt_dt(r.end_date)}" if r.end_date else "")
+                    + (f", {r.occurrence_count}×" if r.occurrence_count else ""),
+                )
+                for i, r in enumerate(item.recurrence_rules)
+            ]
+            self.rows_box.append(_make_group("Recurrence", rec_rows))
+
+        meta: list[tuple[str, str]] = [
+            ("Created", _fmt_dt(item.created_date)),
+            ("Modified", _fmt_dt(item.last_modified_date)),
+        ]
+        if item.url:
+            meta.append(("URL", item.url))
+        self.rows_box.append(_make_group("Info", meta))
 
     @Gtk.Template.Callback()
     def on_close_clicked(self, *_args: Any) -> None:
