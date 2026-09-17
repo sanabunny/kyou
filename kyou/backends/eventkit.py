@@ -8,6 +8,8 @@ from kyou.models import Alarm, Item, ItemKind, Priority, RecurrenceRule
 
 try:
     from EventKit import (
+        EKAuthorizationStatusFullAccess,
+        EKAuthorizationStatusWriteOnly,
         EKEntityTypeEvent,
         EKEntityTypeReminder,
         EKEventStore,
@@ -77,9 +79,7 @@ def _alarms(ek_item: object) -> list[Alarm]:
         result.append(
             Alarm(
                 trigger_date=_to_datetime(alarm.absoluteDate()),
-                relative_offset=(
-                    timedelta(seconds=offset) if offset else None
-                ),
+                relative_offset=(timedelta(seconds=offset) if offset else None),
             )
         )
     return result
@@ -104,11 +104,24 @@ class EventKitBackend(Backend):
         self._store = EKEventStore.alloc().init()
 
     def request_access(self) -> bool:
-        events_granted = self._request_full_access(EKEntityTypeEvent, "requestFullAccessToEventsWithCompletion_")
-        reminders_granted = self._request_full_access(EKEntityTypeReminder, "requestFullAccessToRemindersWithCompletion_")
-        return events_granted and reminders_granted
+        self._events_granted = self._request_full_access(
+            EKEntityTypeEvent, "requestFullAccessToEventsWithCompletion_"
+        )
+        status = EKEventStore.authorizationStatusForEntityType_(EKEntityTypeEvent)
+        self._events_readable = status == EKAuthorizationStatusFullAccess
+        self._reminders_granted = self._request_full_access(
+            EKEntityTypeReminder, "requestFullAccessToRemindersWithCompletion_"
+        )
+        if not self._events_readable:
+            print("kyou: Calendar access is WriteOnly — events will not appear in Today view.")
+            print("kyou: Grant Full Access to Calendar in System Settings > Privacy & Security > Calendars.")
+        return self._events_granted or self._reminders_granted
 
     def _request_full_access(self, entity_type: int, modern_selector: str) -> bool:
+        status = EKEventStore.authorizationStatusForEntityType_(entity_type)
+        if status in (EKAuthorizationStatusFullAccess, EKAuthorizationStatusWriteOnly):
+            return True
+
         result: dict[str, bool] = {}
         done = threading.Event()
 
@@ -121,11 +134,18 @@ class EventKitBackend(Backend):
             method(completion)
         else:
             self._store.requestAccessToEntityType_completion_(entity_type, completion)
-            
+
         done.wait(timeout=30)
+
+        status = EKEventStore.authorizationStatusForEntityType_(entity_type)
+        if status in (EKAuthorizationStatusFullAccess, EKAuthorizationStatusWriteOnly):
+            return True
+
         return result.get("granted", False)
 
     def get_events(self, day: date) -> list[Item]:
+        if not getattr(self, "_events_readable", False):
+            return []
         start = datetime.combine(day, datetime.min.time())
         end = start + timedelta(days=1)
 
@@ -135,10 +155,10 @@ class EventKitBackend(Backend):
         ek_events = self._store.eventsMatchingPredicate_(predicate)
 
         items: list[Item] = []
-        
+
         if ek_events is None:
             return items
-        
+
         for ek_event in ek_events:
             items.append(
                 Item(
