@@ -10,7 +10,7 @@ template $Window: Adw.ApplicationWindow {
   content: Adw.ToolbarView {
     content: Overlay {
       child: Adw.ViewStack view_stack {
-        Adw.ViewStackPage {
+        Adw.ViewStackPage today_page {
           name: "today";
           title: _("Today");
           icon-name: "x-office-calendar-symbolic";
@@ -21,18 +21,14 @@ template $Window: Adw.ApplicationWindow {
               height-request: 44;
 
               [end]
-              MenuButton {
+              MenuButton main_menu_button {
                 tooltip-text: _("Main Menu");
                 icon-name: "open-menu-symbolic";
                 primary: true;
-
-                menu-model: menu {
-                  item (_("About Kyou"), "app.about")
-                };
               }
 
               [end]
-              Button {
+              Button create_item_button {
                 tooltip-text: _("Create Item (coming soon)");
                 icon-name: "list-add-symbolic";
                 sensitive: false;
@@ -98,7 +94,7 @@ template $Window: Adw.ApplicationWindow {
           };
         }
 
-        Adw.ViewStackPage {
+        Adw.ViewStackPage reminders_page {
           name: "reminders";
           title: _("Reminders");
           icon-name: "edit-paste-symbolic";
@@ -109,14 +105,10 @@ template $Window: Adw.ApplicationWindow {
               height-request: 44;
 
               [end]
-              MenuButton {
+              MenuButton reminders_menu_button {
                 tooltip-text: _("Main Menu");
                 icon-name: "open-menu-symbolic";
                 primary: true;
-
-                menu-model: menu {
-                  item (_("About Kyou"), "app.about")
-                };
               }
 
               [end]

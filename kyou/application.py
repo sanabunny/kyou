@@ -21,9 +21,12 @@ except (ValueError, ImportError):
         Granite = None
         HAS_GRANITE = False
 
+import gettext
+import locale
+
 from gi.repository import Adw, Gdk, GObject, Gtk
 
-from .config import APP_ID, PREFIX
+from .config import APP_ID, LOCALEDIR, PREFIX
 from .ui.window import Window
 
 
@@ -32,6 +35,14 @@ class Application(Adw.Application):
 
     @override
     def do_startup(self) -> None:
+        try:
+            locale.bindtextdomain("kyou", LOCALEDIR)
+            locale.textdomain("kyou")
+        except AttributeError:
+            pass
+        gettext.bindtextdomain("kyou", LOCALEDIR)
+        gettext.textdomain("kyou")
+
         Adw.Application.do_startup(self)
 
         if HAS_GRANITE:

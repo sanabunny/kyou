@@ -1,0 +1,458 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the kyou package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: kyou\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-18 18:20+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Translators: Replace "translator-credits" with your name/username,
+#. and optionally a URL or an email in <me@example.org> format.
+#: kyou/application.py:85
+msgid "translator-credits"
+msgstr ""
+
+#: kyou/ui/window.blp:6 data/casa.bnuuy.kyou.desktop.in:2
+#: data/casa.bnuuy.kyou.metainfo.xml.in:7
+msgid "Kyou"
+msgstr ""
+
+#: kyou/ui/window.blp:15 kyou/ui/window.py:66 kyou/ui/window.py:104
+msgid "Today"
+msgstr ""
+
+#: kyou/ui/window.blp:25 kyou/ui/window.blp:109 kyou/ui/window.py:110
+#: kyou/ui/window.py:112
+msgid "Main Menu"
+msgstr ""
+
+#: kyou/ui/window.blp:32 kyou/ui/window.blp:116 kyou/ui/window.py:114
+#: kyou/ui/window.py:115
+msgid "Create Item (coming soon)"
+msgstr ""
+
+#: kyou/ui/window.blp:61 kyou/ui/window.py:139
+msgid "good morning! 🌸"
+msgstr ""
+
+#: kyou/ui/window.blp:71
+msgid "wednesday, 29 july"
+msgstr ""
+
+#: kyou/ui/window.blp:87 kyou/ui/window.py:117
+msgid "Nothing Scheduled"
+msgstr ""
+
+#: kyou/ui/window.blp:88 kyou/ui/window.py:118
+msgid "You have nothing on today 🌸"
+msgstr ""
+
+#: kyou/ui/window.blp:99 kyou/ui/window.py:105
+#: kyou/ui/reminder_info_dialog.py:114
+msgid "Reminders"
+msgstr ""
+
+#: kyou/ui/window.blp:147 kyou/ui/window.py:119
+msgid "No Reminders"
+msgstr ""
+
+#: kyou/ui/window.blp:148 kyou/ui/window.py:120
+msgid "You have no reminders set up yet."
+msgstr ""
+
+#: kyou/ui/window.py:17
+msgid "Monday"
+msgstr ""
+
+#: kyou/ui/window.py:18
+msgid "Tuesday"
+msgstr ""
+
+#: kyou/ui/window.py:19
+msgid "Wednesday"
+msgstr ""
+
+#: kyou/ui/window.py:20
+msgid "Thursday"
+msgstr ""
+
+#: kyou/ui/window.py:21
+msgid "Friday"
+msgstr ""
+
+#: kyou/ui/window.py:22
+msgid "Saturday"
+msgstr ""
+
+#: kyou/ui/window.py:23
+msgid "Sunday"
+msgstr ""
+
+#: kyou/ui/window.py:27
+msgid "January"
+msgstr ""
+
+#: kyou/ui/window.py:28
+msgid "February"
+msgstr ""
+
+#: kyou/ui/window.py:29
+msgid "March"
+msgstr ""
+
+#: kyou/ui/window.py:30
+msgid "April"
+msgstr ""
+
+#: kyou/ui/window.py:31 kyou/ui/window.py:46
+msgid "May"
+msgstr ""
+
+#: kyou/ui/window.py:32
+msgid "June"
+msgstr ""
+
+#: kyou/ui/window.py:33
+msgid "July"
+msgstr ""
+
+#: kyou/ui/window.py:34
+msgid "August"
+msgstr ""
+
+#: kyou/ui/window.py:35
+msgid "September"
+msgstr ""
+
+#: kyou/ui/window.py:36
+msgid "October"
+msgstr ""
+
+#: kyou/ui/window.py:37
+msgid "November"
+msgstr ""
+
+#: kyou/ui/window.py:38
+msgid "December"
+msgstr ""
+
+#: kyou/ui/window.py:42
+msgid "Jan"
+msgstr ""
+
+#: kyou/ui/window.py:43
+msgid "Feb"
+msgstr ""
+
+#: kyou/ui/window.py:44
+msgid "Mar"
+msgstr ""
+
+#: kyou/ui/window.py:45
+msgid "Apr"
+msgstr ""
+
+#: kyou/ui/window.py:47
+msgid "Jun"
+msgstr ""
+
+#: kyou/ui/window.py:48
+msgid "Jul"
+msgstr ""
+
+#: kyou/ui/window.py:49
+msgid "Aug"
+msgstr ""
+
+#: kyou/ui/window.py:50
+msgid "Sep"
+msgstr ""
+
+#: kyou/ui/window.py:51
+msgid "Oct"
+msgstr ""
+
+#: kyou/ui/window.py:52
+msgid "Nov"
+msgstr ""
+
+#: kyou/ui/window.py:53
+msgid "Dec"
+msgstr ""
+
+#: kyou/ui/window.py:66
+#, python-brace-format
+msgid "Today · {}"
+msgstr ""
+
+#: kyou/ui/window.py:68
+#, python-brace-format
+msgid "Tomorrow · {}"
+msgstr ""
+
+#: kyou/ui/window.py:68
+msgid "Tomorrow"
+msgstr ""
+
+#: kyou/ui/window.py:70
+#, python-brace-format
+msgid "Yesterday · {}"
+msgstr ""
+
+#: kyou/ui/window.py:70
+msgid "Yesterday"
+msgstr ""
+
+#: kyou/ui/window.py:73
+#, python-brace-format
+msgid "{day} {month}"
+msgstr ""
+
+#: kyou/ui/window.py:74 kyou/ui/window.py:78
+#, python-brace-format
+msgid "{date} · {time}"
+msgstr ""
+
+#: kyou/ui/window.py:77
+#, python-brace-format
+msgid "{day} {month} {year}"
+msgstr ""
+
+#: kyou/ui/window.py:108
+msgid "About Kyou"
+msgstr ""
+
+#: kyou/ui/window.py:141
+msgid "good afternoon! ☀️"
+msgstr ""
+
+#: kyou/ui/window.py:143
+msgid "good evening! 🌆"
+msgstr ""
+
+#: kyou/ui/window.py:145
+msgid "good night! 🌙"
+msgstr ""
+
+#: kyou/ui/window.py:150
+#, python-brace-format
+msgid "{weekday}, {day} {month}"
+msgstr ""
+
+#: kyou/ui/window.py:198
+msgid "Other"
+msgstr ""
+
+#: kyou/ui/window.py:248 kyou/ui/window.py:279 kyou/ui/window.py:336
+#, python-brace-format
+msgid "{}h {}m"
+msgstr ""
+
+#: kyou/ui/window.py:250 kyou/ui/window.py:281 kyou/ui/window.py:338
+#, python-brace-format
+msgid "{}h"
+msgstr ""
+
+#: kyou/ui/window.py:252 kyou/ui/window.py:283 kyou/ui/window.py:340
+#, python-brace-format
+msgid "{}m"
+msgstr ""
+
+#: kyou/ui/window.py:254
+#, python-brace-format
+msgid "{} free time"
+msgstr ""
+
+#: kyou/ui/window.py:255 kyou/ui/window.py:270 kyou/ui/window.py:343
+msgid "NOW"
+msgstr ""
+
+#: kyou/ui/window.py:264
+msgid "All Day"
+msgstr ""
+
+#: kyou/ui/window.py:342
+#, python-brace-format
+msgid "{} → time left of day"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:13
+msgid "⚡ High"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:15
+msgid "● Medium"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:17
+msgid "▾ Low"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:35
+#, python-brace-format
+msgid "{}h {}m before"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:37
+#, python-brace-format
+msgid "{}h before"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:38
+#, python-brace-format
+msgid "{}m before"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:68
+msgid "Calendar"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:69
+msgid "Start"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:70
+msgid "End"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:73 kyou/ui/reminder_info_dialog.py:86
+msgid "Location"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:76
+msgid "List"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:77
+msgid "Priority"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:78
+msgid "Due"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:79
+msgid "Status"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:79
+msgid "✓ Completed"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:79
+msgid "Pending"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:82
+msgid "Completed on"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:84
+msgid "Flagged"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:84
+msgid "Yes ⚑"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:88
+msgid "Details"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:91
+msgid "Notes"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:109
+#, python-brace-format
+msgid "Alarm {}"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:119
+#, python-brace-format
+msgid "Repeat {}"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:127
+msgid "Recurrence"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:130
+msgid "Created"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:131
+msgid "Modified"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:134
+msgid "URL"
+msgstr ""
+
+#: kyou/ui/reminder_info_dialog.py:135
+msgid "Info"
+msgstr ""
+
+#: kyou/ui/reminder-info-dialog.blp:16
+msgid "Close"
+msgstr ""
+
+#: kyou/ui/reminder_list_section.py:21
+msgid "▲ HIGH"
+msgstr ""
+
+#: kyou/ui/reminder_list_section.py:24
+msgid "● MEDIUM"
+msgstr ""
+
+#: kyou/ui/reminder_list_section.py:27
+msgid "▼ LOW"
+msgstr ""
+
+#: kyou/ui/reminder_list_section.py:30
+msgid "▪ OTHER"
+msgstr ""
+
+#: data/casa.bnuuy.kyou.desktop.in:3
+msgid "View and manage your tasks and calendar for today"
+msgstr ""
+
+#: data/casa.bnuuy.kyou.desktop.in:9
+msgid "calendar;todo;tasks;reminders;today;agenda;schedule;GTK;"
+msgstr ""
+
+#: data/casa.bnuuy.kyou.metainfo.xml.in:8
+msgid "Today's agenda and tasks"
+msgstr ""
+
+#: data/casa.bnuuy.kyou.metainfo.xml.in:10
+msgid ""
+"Kyou is a focused task and calendar manager designed to answer one simple "
+"question: what am I meant to be doing right now?"
+msgstr ""
+
+#: data/casa.bnuuy.kyou.metainfo.xml.in:13
+msgid ""
+"Instead of overwhelming you with endless lists and complicated calendar "
+"views, Kyou gathers your schedule and reminders into a single, clean, and "
+"intuitive overview."
+msgstr ""
+
+#: data/casa.bnuuy.kyou.metainfo.xml.in:47
+msgid "Today tab showing your schedule at a glance"
+msgstr ""
+
+#: data/casa.bnuuy.kyou.metainfo.xml.in:51
+msgid "Reminders tab showing your task lists"
+msgstr ""

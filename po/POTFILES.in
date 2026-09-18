@@ -1,6 +1,9 @@
 kyou/application.py
 kyou/ui/window.blp
 kyou/ui/window.py
+kyou/ui/reminder_info_dialog.py
+kyou/ui/reminder-info-dialog.blp
+kyou/ui/reminder_list_section.py
 data/casa.bnuuy.kyou.desktop.in
 data/casa.bnuuy.kyou.gschema.xml.in
 data/casa.bnuuy.kyou.metainfo.xml.in

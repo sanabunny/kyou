@@ -1,3 +1,4 @@
+from gettext import gettext as _
 from typing import Any
 
 from gi.repository import Adw, Gtk
@@ -17,16 +18,16 @@ class ReminderListSection(Gtk.Box):
         super().__init__(**kwargs)
         
         if priority == Priority.HIGH:
-            self.header_button.set_label("▲ HIGH")
+            self.header_button.set_label(_("▲ HIGH"))
             self.header_button.add_css_class("destructive-action")
         elif priority == Priority.MEDIUM:
-            self.header_button.set_label("● MEDIUM")
+            self.header_button.set_label(_("● MEDIUM"))
             self.header_button.add_css_class("warning")
         elif priority == Priority.LOW:
-            self.header_button.set_label("▼ LOW")
+            self.header_button.set_label(_("▼ LOW"))
             self.header_button.add_css_class("success")
         else:
-            self.header_button.set_label("▪ OTHER")
+            self.header_button.set_label(_("▪ OTHER"))
 
     def add_row(self, row: Gtk.Widget) -> None:
         self.preferences_group.add(row)

@@ -1,3 +1,4 @@
+from gettext import gettext as _
 from typing import Any
 
 from gi.repository import Adw, Gdk, Gtk
@@ -6,12 +7,16 @@ from kyou.config import PREFIX
 from kyou.models import Item, ItemKind, Priority
 
 
-_PRIORITY_LABEL = {
-    Priority.HIGH: "⚡ High",
-    Priority.MEDIUM: "● Medium",
-    Priority.LOW: "▾ Low",
-    Priority.NONE: "—",
-}
+def _get_priority_label(priority: Priority) -> str:
+    match priority:
+        case Priority.HIGH:
+            return _("⚡ High")
+        case Priority.MEDIUM:
+            return _("● Medium")
+        case Priority.LOW:
+            return _("▾ Low")
+        case _:
+            return "—"
 
 
 def _fmt_dt(dt: Any) -> str:
@@ -27,10 +32,10 @@ def _fmt_offset(td: Any) -> str:
     hours, rem = divmod(abs(total), 3600)
     mins = rem // 60
     if hours and mins:
-        return f"{hours}h {mins}m before"
+        return _("{}h {}m before").format(hours, mins)
     if hours:
-        return f"{hours}h before"
-    return f"{mins}m before"
+        return _("{}h before").format(hours)
+    return _("{}m before").format(mins)
 
 
 def _make_group(title: str, rows: list[tuple[str, str]]) -> Adw.PreferencesGroup:
@@ -60,30 +65,30 @@ class ReminderInfoDialog(Adw.Dialog):
 
         if item.kind == ItemKind.EVENT:
             details: list[tuple[str, str]] = [
-                ("Calendar", item.list_name or "—"),
-                ("Start", _fmt_dt(item.start)),
-                ("End", _fmt_dt(item.end)),
+                (_("Calendar"), item.list_name or "—"),
+                (_("Start"), _fmt_dt(item.start)),
+                (_("End"), _fmt_dt(item.end)),
             ]
             if item.location:
-                details.append(("Location", item.location))
+                details.append((_("Location"), item.location))
         else:
             details: list[tuple[str, str]] = [
-                ("List", item.list_name or "—"),
-                ("Priority", _PRIORITY_LABEL.get(item.priority, "—")),
-                ("Due", _fmt_dt(item.due_date)),
-                ("Status", "✓ Completed" if item.completed else "Pending"),
+                (_("List"), item.list_name or "—"),
+                (_("Priority"), _get_priority_label(item.priority)),
+                (_("Due"), _fmt_dt(item.due_date)),
+                (_("Status"), _("✓ Completed") if item.completed else _("Pending")),
             ]
             if item.completed_date:
-                details.append(("Completed on", _fmt_dt(item.completed_date)))
+                details.append((_("Completed on"), _fmt_dt(item.completed_date)))
             if item.flagged:
-                details.append(("Flagged", "Yes ⚑"))
+                details.append((_("Flagged"), _("Yes ⚑")))
             if item.location:
-                details.append(("Location", item.location))
+                details.append((_("Location"), item.location))
 
-        self.rows_box.append(_make_group("Details", details))
+        self.rows_box.append(_make_group(_("Details"), details))
 
         if item.notes:
-            notes_group = Adw.PreferencesGroup(title="Notes")
+            notes_group = Adw.PreferencesGroup(title=_("Notes"))
             label = Gtk.Label(
                 label=item.notes,
                 wrap=True,
@@ -101,17 +106,17 @@ class ReminderInfoDialog(Adw.Dialog):
         if item.alarms:
             alarm_rows = [
                 (
-                    f"Alarm {i + 1}",
+                    _("Alarm {}").format(i + 1),
                     _fmt_dt(a.trigger_date) if a.trigger_date else _fmt_offset(a.relative_offset),
                 )
                 for i, a in enumerate(item.alarms)
             ]
-            self.rows_box.append(_make_group("Reminders", alarm_rows))
+            self.rows_box.append(_make_group(_("Reminders"), alarm_rows))
 
         if item.recurrence_rules:
             rec_rows = [
                 (
-                    f"Repeat {i + 1}",
+                    _("Repeat {}").format(i + 1),
                     f"{(r.frequency or 'unknown').capitalize()}"
                     + (f", every {r.interval}" if r.interval and r.interval > 1 else "")
                     + (f", until {_fmt_dt(r.end_date)}" if r.end_date else "")
@@ -119,15 +124,15 @@ class ReminderInfoDialog(Adw.Dialog):
                 )
                 for i, r in enumerate(item.recurrence_rules)
             ]
-            self.rows_box.append(_make_group("Recurrence", rec_rows))
+            self.rows_box.append(_make_group(_("Recurrence"), rec_rows))
 
         meta: list[tuple[str, str]] = [
-            ("Created", _fmt_dt(item.created_date)),
-            ("Modified", _fmt_dt(item.last_modified_date)),
+            (_("Created"), _fmt_dt(item.created_date)),
+            (_("Modified"), _fmt_dt(item.last_modified_date)),
         ]
         if item.url:
-            meta.append(("URL", item.url))
-        self.rows_box.append(_make_group("Info", meta))
+            meta.append((_("URL"), item.url))
+        self.rows_box.append(_make_group(_("Info"), meta))
 
     @Gtk.Template.Callback()
     def on_close_clicked(self, *_args: Any) -> None:

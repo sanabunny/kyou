@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from gettext import gettext as _
 from typing import Any
 
-from gi.repository import Adw, GLib, Gtk
+from gi.repository import Adw, Gio, GLib, Gtk
 
 from kyou.config import PREFIX
 from kyou.ui.add_item_dialog import AddItemDialog
@@ -11,6 +11,47 @@ from kyou.ui.now_card import NowCard
 from kyou.ui.today_card import TodayCard
 from kyou.ui.reminder_list_section import ReminderListSection
 from kyou.ui.reminder_row import ReminderRow
+
+
+_WEEKDAYS = [
+    _("Monday"),
+    _("Tuesday"),
+    _("Wednesday"),
+    _("Thursday"),
+    _("Friday"),
+    _("Saturday"),
+    _("Sunday"),
+]
+
+_MONTHS = [
+    _("January"),
+    _("February"),
+    _("March"),
+    _("April"),
+    _("May"),
+    _("June"),
+    _("July"),
+    _("August"),
+    _("September"),
+    _("October"),
+    _("November"),
+    _("December"),
+]
+
+_SHORT_MONTHS = [
+    _("Jan"),
+    _("Feb"),
+    _("Mar"),
+    _("Apr"),
+    _("May"),
+    _("Jun"),
+    _("Jul"),
+    _("Aug"),
+    _("Sep"),
+    _("Oct"),
+    _("Nov"),
+    _("Dec"),
+]
 
 
 def _format_due_date(due: datetime | None, all_day: bool = False) -> str | None:
@@ -22,17 +63,19 @@ def _format_due_date(due: datetime | None, all_day: bool = False) -> str | None:
     time_str = due.strftime("%H:%M") if has_time else ""
 
     if due_date == today:
-        return f"Today · {time_str}" if has_time else "Today"
+        return _("Today · {}").format(time_str) if has_time else _("Today")
     elif due_date == today + timedelta(days=1):
-        return f"Tomorrow · {time_str}" if has_time else "Tomorrow"
+        return _("Tomorrow · {}").format(time_str) if has_time else _("Tomorrow")
     elif due_date == today - timedelta(days=1):
-        return f"Yesterday · {time_str}" if has_time else "Yesterday"
+        return _("Yesterday · {}").format(time_str) if has_time else _("Yesterday")
     elif due_date.year == today.year:
-        date_str = f"{due.day} {due.strftime('%b')}"
-        return f"{date_str} · {time_str}" if has_time else date_str
+        m_str = _SHORT_MONTHS[due.month - 1]
+        date_str = _("{day} {month}").format(day=due.day, month=m_str)
+        return _("{date} · {time}").format(date=date_str, time=time_str) if has_time else date_str
     else:
-        date_str = f"{due.day} {due.strftime('%b %Y')}"
-        return f"{date_str} · {time_str}" if has_time else date_str
+        m_str = _SHORT_MONTHS[due.month - 1]
+        date_str = _("{day} {month} {year}").format(day=due.day, month=m_str, year=due.year)
+        return _("{date} · {time}").format(date=date_str, time=time_str) if has_time else date_str
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/window.ui")
@@ -48,9 +91,33 @@ class Window(Adw.ApplicationWindow):
     no_reminders_page: Adw.StatusPage = Gtk.Template.Child()
     no_events_page: Adw.StatusPage = Gtk.Template.Child()
     view_stack: Adw.ViewStack = Gtk.Template.Child()
+    today_page: Any = Gtk.Template.Child()
+    reminders_page: Any = Gtk.Template.Child()
+    main_menu_button: Gtk.MenuButton = Gtk.Template.Child()
+    reminders_menu_button: Gtk.MenuButton = Gtk.Template.Child()
+    create_item_button: Gtk.Button = Gtk.Template.Child()
+    add_item_button: Gtk.Button = Gtk.Template.Child()
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
+
+        self.today_page.set_title(_("Today"))
+        self.reminders_page.set_title(_("Reminders"))
+
+        menu = Gio.Menu()
+        menu.append(_("About Kyou"), "app.about")
+        self.main_menu_button.set_menu_model(menu)
+        self.main_menu_button.set_tooltip_text(_("Main Menu"))
+        self.reminders_menu_button.set_menu_model(menu)
+        self.reminders_menu_button.set_tooltip_text(_("Main Menu"))
+
+        self.create_item_button.set_tooltip_text(_("Create Item (coming soon)"))
+        self.add_item_button.set_tooltip_text(_("Create Item (coming soon)"))
+
+        self.no_events_page.set_title(_("Nothing Scheduled"))
+        self.no_events_page.set_description(_("You have nothing on today 🌸"))
+        self.no_reminders_page.set_title(_("No Reminders"))
+        self.no_reminders_page.set_description(_("You have no reminders set up yet."))
 
         style_manager = Adw.StyleManager.get_default()
         self._update_color_scheme(style_manager)
@@ -78,7 +145,14 @@ class Window(Adw.ApplicationWindow):
             greeting = _("good night! 🌙")
 
         self.greeting_label.set_label(greeting)
-        self.date_label.set_label(now.strftime("%A, %-d %B").lower())
+        weekday_name = _WEEKDAYS[now.weekday()]
+        month_name = _MONTHS[now.month - 1]
+        date_formatted = _("{weekday}, {day} {month}").format(
+            weekday=weekday_name,
+            day=now.day,
+            month=month_name,
+        )
+        self.date_label.set_label(date_formatted)
         return GLib.SOURCE_CONTINUE
 
     def _load_system_data(self) -> None:
@@ -121,7 +195,7 @@ class Window(Adw.ApplicationWindow):
         
         lists = {}
         for item in reminders:
-            list_name = item.list_name or "Other"
+            list_name = item.list_name or _("Other")
             if list_name not in lists:
                 lists[list_name] = {}
             prio = item.priority
@@ -171,13 +245,14 @@ class Window(Adw.ApplicationWindow):
                     gap_hours = gap_minutes // 60
                     gap_mins = gap_minutes % 60
                     if gap_hours > 0 and gap_mins > 0:
-                        gap_str = f"{gap_hours}h {gap_mins}m"
+                        gap_str = _("{}h {}m").format(gap_hours, gap_mins)
                     elif gap_hours > 0:
-                        gap_str = f"{gap_hours}h"
+                        gap_str = _("{}h").format(gap_hours)
                     else:
-                        gap_str = f"{gap_mins}m"
+                        gap_str = _("{}m").format(gap_mins)
                     is_gap_now = last_end_time <= now < event.start
-                    gap_text = f"{gap_str} free time" + (" · NOW" if is_gap_now else "")
+                    gap_label = _("{} free time").format(gap_str)
+                    gap_text = f"{gap_label} · " + _("NOW") if is_gap_now else gap_label
                     gap_row = GapRow(emoji_text="☕", text_text=gap_text, is_now=is_gap_now)
                     self.today_list_container.append(gap_row)
                     
@@ -192,7 +267,7 @@ class Window(Adw.ApplicationWindow):
                 if event.end and not event.all_day:
                     time_text += " – " + event.end.strftime("%H:%M")
                 if is_active:
-                    time_text += "  · NOW"
+                    time_text += "  · " + _("NOW")
 
             subtitle_text = ""
             if event.start and event.end and not event.all_day:
@@ -201,11 +276,11 @@ class Window(Adw.ApplicationWindow):
                 dur_hours = dur_minutes // 60
                 dur_mins = dur_minutes % 60
                 if dur_hours > 0 and dur_mins > 0:
-                    subtitle_text = f"{dur_hours}h {dur_mins}m"
+                    subtitle_text = _("{}h {}m").format(dur_hours, dur_mins)
                 elif dur_hours > 0:
-                    subtitle_text = f"{dur_hours}h"
+                    subtitle_text = _("{}h").format(dur_hours)
                 else:
-                    subtitle_text = f"{dur_mins}m"
+                    subtitle_text = _("{}m").format(dur_mins)
                     
             if event.kind.name == "REMINDER":
                 emoji_text = "✅"
@@ -258,13 +333,14 @@ class Window(Adw.ApplicationWindow):
                 gap_hours = gap_minutes // 60
                 gap_mins = gap_minutes % 60
                 if gap_hours > 0 and gap_mins > 0:
-                    gap_str = f"{gap_hours}h {gap_mins}m"
+                    gap_str = _("{}h {}m").format(gap_hours, gap_mins)
                 elif gap_hours > 0:
-                    gap_str = f"{gap_hours}h"
+                    gap_str = _("{}h").format(gap_hours)
                 else:
-                    gap_str = f"{gap_mins}m"
+                    gap_str = _("{}m").format(gap_mins)
                 is_gap_now = last_end_time <= now < end_of_day
-                gap_text = f"{gap_str} → time left of day" + (" · NOW" if is_gap_now else "")
+                gap_label = _("{} → time left of day").format(gap_str)
+                gap_text = f"{gap_label} · " + _("NOW") if is_gap_now else gap_label
                 gap_row = GapRow(emoji_text="🌙", text_text=gap_text, is_now=is_gap_now)
                 self.today_list_container.append(gap_row)
 
