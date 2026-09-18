@@ -28,7 +28,7 @@ localedir = get_option('prefix') / get_option('localedir')
 bindir = get_option('prefix') / get_option('bindir')
 resourcedir = python.get_install_dir() / 'kyou' / 'resources'
 
-app_id = 'page.fuwa.kyou'
+app_id = 'casa.bnuuy.kyou'
 prefix = '/page/fuwa/kyou'
 
 conf = configuration_data(

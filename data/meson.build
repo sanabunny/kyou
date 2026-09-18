@@ -1,5 +1,5 @@
 desktop_file = configure_file(
-  input: 'page.fuwa.kyou.desktop.in',
+  input: 'casa.bnuuy.kyou.desktop.in',
   output: '@PLAINNAME@',
   configuration: conf,
 )
@@ -16,7 +16,7 @@ desktop_file = i18n.merge_file(
 test('Validate desktop file', desktop_utils, args: desktop_file)
 
 configure_file(
-  input: 'page.fuwa.kyou.gschema.xml.in',
+  input: 'casa.bnuuy.kyou.gschema.xml.in',
   output: f'@app_id@.gschema.xml',
   configuration: conf,
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas',
@@ -29,7 +29,7 @@ test(
 )
 
 appstream_file = configure_file(
-  input: 'page.fuwa.kyou.metainfo.xml.in',
+  input: 'casa.bnuuy.kyou.metainfo.xml.in',
   output: '@PLAINNAME@',
   configuration: conf,
 )
@@ -49,7 +49,7 @@ test(
 )
 
 configure_file(
-  input: 'page.fuwa.kyou.service.in',
+  input: 'casa.bnuuy.kyou.service.in',
   output: f'@app_id@.service',
   configuration: conf,
   install_dir: get_option('datadir') / 'dbus-1' / 'services',

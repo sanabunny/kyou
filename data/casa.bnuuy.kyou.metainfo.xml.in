@@ -23,13 +23,13 @@
   </description>
 
   <developer id="page.fuwa">
-    <name translate="no">fuwaflow</name>
+    <name translate="no">sanabunny</name>
   </developer>
 
-  <url type="homepage">https://fuwa.page/</url>
-  <url type="vcs-browser">https://github.com/fuwaflow/kyou</url>
-  <url type="bugtracker">https://github.com/fuwaflow/kyou/issues</url>
-  <url type="contact">https://github.com/fuwaflow/kyou/issues</url>
+  <url type="homepage">https://bnuuy.casa/</url>
+  <url type="vcs-browser">https://github.com/sanabunny/kyou</url>
+  <url type="bugtracker">https://github.com/sanabunny/kyou/issues</url>
+  <url type="contact">https://github.com/sanabunny/kyou/issues</url>
 
   <translation type="gettext">kyou</translation>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
@@ -52,11 +52,11 @@
   <screenshots>
     <screenshot type="default">
       <caption>Today tab showing your schedule at a glance</caption>
-      <image>https://raw.githubusercontent.com/fuwaflow/kyou/main/data/screenshots/today.png</image>
+      <image>https://raw.githubusercontent.com/sanabunny/kyou/main/data/screenshots/today.png</image>
     </screenshot>
     <screenshot>
       <caption>Reminders tab showing your task lists</caption>
-      <image>https://raw.githubusercontent.com/fuwaflow/kyou/main/data/screenshots/reminders.png</image>
+      <image>https://raw.githubusercontent.com/sanabunny/kyou/main/data/screenshots/reminders.png</image>
     </screenshot>
   </screenshots>
 

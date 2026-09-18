@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="data/icons/page.fuwa.kyou.svg" width="128" height="128" />
+    <img src="data/icons/casa.bnuuy.kyou.svg" width="128" height="128" />
     <h1>Kyou</h1>
     <img width="240" alt="Today tab" src="data/screenshots/today.png" />
     <img width="240" alt="Reminders tab" src="data/screenshots/reminders.png" />
