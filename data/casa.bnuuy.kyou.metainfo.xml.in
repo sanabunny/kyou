@@ -13,13 +13,6 @@
     <p>
       Instead of overwhelming you with endless lists and complicated calendar views, Kyou gathers your schedule and reminders into a single, clean, and intuitive overview.
     </p>
-    <p>Features include:</p>
-    <ul>
-      <li>Direct integration with system calendar and reminders via Evolution Data Server</li>
-      <li>At-a-glance cards showing your current and upcoming agenda for today</li>
-      <li>Simple distraction-free interface built with GTK 4 and Libadwaita</li>
-      <li>Full support for dark mode and system accent colors</li>
-    </ul>
   </description>
 
   <developer id="casa.bnuuy">
