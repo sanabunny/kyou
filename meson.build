@@ -29,7 +29,7 @@ bindir = get_option('prefix') / get_option('bindir')
 resourcedir = python.get_install_dir() / 'kyou' / 'resources'
 
 app_id = 'casa.bnuuy.kyou'
-prefix = '/page/fuwa/kyou'
+prefix = '/casa/bnuuy/kyou'
 
 conf = configuration_data(
     {
