@@ -1,6 +1,6 @@
 from typing import Any
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, GLib, Gtk
 
 from kyou.config import PREFIX
 
@@ -21,7 +21,6 @@ class ReminderRow(Adw.ActionRow):
         super().__init__(**kwargs)
         self.add_css_class("reminder-row")
         self.set_cursor_from_name("pointer")
-        self.check_button.set_cursor_from_name("pointer")
 
         motion = Gtk.EventControllerMotion()
         motion.connect("enter", lambda *_a: self.add_css_class("row-hover"))
@@ -32,7 +31,9 @@ class ReminderRow(Adw.ActionRow):
 
         if due_time:
             self.set_subtitle(due_time)
-            
+
         if completed:
             self.check_button.set_active(True)
             self.add_css_class("dim-label")
+            self.set_use_markup(True)
+            self.set_title(f"<s>{GLib.markup_escape_text(title)}</s>")
