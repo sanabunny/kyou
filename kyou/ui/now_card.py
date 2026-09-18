@@ -39,7 +39,9 @@ class NowCard(Gtk.Overlay):
 
         motion = Gtk.EventControllerMotion()
         motion.connect("enter", lambda *_a: self.card_box.add_css_class("card-hover"))
-        motion.connect("leave", lambda *_a: self.card_box.remove_css_class("card-hover"))
+        motion.connect(
+            "leave", lambda *_a: self.card_box.remove_css_class("card-hover")
+        )
         self.card_box.add_controller(motion)
 
         click = Gtk.GestureClick()
@@ -68,7 +70,7 @@ class NowCard(Gtk.Overlay):
             self._color_provider = Gtk.CssProvider()
             self._color_provider.load_from_string(css)
             self.card_box.get_style_context().add_provider(
-                self._color_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+                self._color_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
             )
 
         if self.sticker_type == "pin":
