@@ -51,8 +51,12 @@
 
   <screenshots>
     <screenshot type="default">
-      <caption>Today's schedule and reminders view in Kyou</caption>
-      <image>https://raw.githubusercontent.com/fuwaflow/kyou/main/data/screenshots/window.png</image>
+      <caption>Today tab showing your schedule at a glance</caption>
+      <image>https://raw.githubusercontent.com/fuwaflow/kyou/main/data/screenshots/today.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Reminders tab showing your task lists</caption>
+      <image>https://raw.githubusercontent.com/fuwaflow/kyou/main/data/screenshots/reminders.png</image>
     </screenshot>
   </screenshots>
 
